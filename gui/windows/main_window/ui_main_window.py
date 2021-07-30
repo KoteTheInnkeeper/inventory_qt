@@ -1,13 +1,11 @@
 import logging
 
-from gui.colors import Color
+from gui.gui_constants import Color, Dimension
 from qt_core import *
+from gui.widgets.py_pushbutton import LeftMenuPushButton
 
 log = logging.getLogger("inventory_qt.ui_main_window")
 
-TOP_BAR_HEIGHT = 30
-LEFT_MENU_WIDTH = 50
-BOTTOM_BAR_HEIGHT = 30
 
 class UIMainWindow(object):
     """A class to hold the main window widgets."""
@@ -31,9 +29,34 @@ class UIMainWindow(object):
 
         # Left menu frame
         self.left_menu = QFrame()
-        self.left_menu.setStyleSheet(f"background-color: {Color.LEFT_MENU}; border-right: 1px solid grey;")
-        self.left_menu.setMaximumWidth(LEFT_MENU_WIDTH)
-        self.left_menu.setMinimumWidth(LEFT_MENU_WIDTH)
+        self.left_menu.setStyleSheet(f"background-color: {Color.LEFT_MENU};")
+        self.left_menu.setMaximumWidth(Dimension.LEFT_MENU_WIDTH)
+        self.left_menu.setMinimumWidth(Dimension.LEFT_MENU_WIDTH)
+        
+        # Left menu layout
+        self.left_menu_layout = QVBoxLayout(self.left_menu)
+        self.left_menu_layout.setContentsMargins(0, 0, 0, 10)
+        self.left_menu_layout.setSpacing(0)
+
+        # Toggle, sell and stock buttons
+        self.toggle_btn = LeftMenuPushButton("Hide menu")
+        self.home_btn = LeftMenuPushButton("Home")
+        self.stock_btn = LeftMenuPushButton("Stock")
+
+        # A spacer for the left menu
+        self.left_menu_spacer = QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        # A version label
+        self.version_label = QLabel("v1.0.0")
+        self.version_label.setAlignment(Qt.AlignCenter)
+        self.version_label.setStyleSheet(f"color: {Color.BOT_BAR_TEXT}; font: 9pt 'Segoe UI';")
+
+        # Adding elements to the left_menu_layout
+        self.left_menu_layout.addWidget(self.toggle_btn)
+        self.left_menu_layout.addWidget(self.home_btn)
+        self.left_menu_layout.addWidget(self.stock_btn)
+        self.left_menu_layout.addItem(self.left_menu_spacer)
+        self.left_menu_layout.addWidget(self.version_label)
 
         # Content frame
         self.content = QFrame()
@@ -46,8 +69,8 @@ class UIMainWindow(object):
 
         # Top bar frame
         self.top_bar = QFrame()
-        self.top_bar.setMinimumHeight(TOP_BAR_HEIGHT)
-        self.top_bar.setMaximumHeight(TOP_BAR_HEIGHT)
+        self.top_bar.setMinimumHeight(Dimension.TOP_BAR_HEIGHT)
+        self.top_bar.setMaximumHeight(Dimension.TOP_BAR_HEIGHT)
         self.top_bar.setStyleSheet(f"background-color: {Color.TOP_BAR}; color: #162d50;")
         
         # A top bar layout to organize the labels
@@ -70,16 +93,37 @@ class UIMainWindow(object):
         self.top_layout.addItem(self.top_spacer)
         self.top_layout.addWidget(self.top_label_right)
         
-
         # Pages widget
         self.pages = QStackedWidget()
         self.pages.setStyleSheet("font-size: 12pt; color: #0b2817;")
 
         # Bot bar frame
         self.bot_bar = QFrame()
-        self.bot_bar.setMinimumHeight(BOTTOM_BAR_HEIGHT)
-        self.bot_bar.setMaximumHeight(BOTTOM_BAR_HEIGHT)
-        self.bot_bar.setStyleSheet(f"background-color: {Color.BOT_BAR}; color: #d5e5ff; font: 75 14pt 'Segoe UI';")
+        self.bot_bar.setMinimumHeight(Dimension.BOTTOM_BAR_HEIGHT)
+        self.bot_bar.setMaximumHeight(Dimension.BOTTOM_BAR_HEIGHT)
+        self.bot_bar.setStyleSheet(f"background-color: {Color.BOT_BAR}; color: {Color.BOT_BAR_TEXT}; font: 75 14pt 'Segoe UI';")
+
+        # Bot bar layout
+        self.bot_layout = QHBoxLayout(self.bot_bar)
+        self.bot_layout.setContentsMargins(10, 0, 10, 0)
+        self.bot_layout.setSpacing(0)
+
+        # Bot left label
+        self.bot_label_left = QLabel("Inventory project by KoteTheInnkeeper")
+        self.bot_label_left.setStyleSheet("font: 75 10pt 'Segoe UI';")
+        
+        # Bot spacer
+        self.bot_spacer = QSpacerItem(20, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        # Bot right label
+        self.bot_label_right = QLabel("© 2021")
+        self.bot_label_right.setStyleSheet("font: 12pt 'Segoe UI';")
+
+        # Adding these last three elements to the bot_layout
+        self.bot_layout.addWidget(self.bot_label_left)
+        self.bot_layout.addItem(self.bot_spacer)
+        self.bot_layout.addWidget(self.bot_label_right)
+
 
         # Adding top bar, stacked widget and bot bar.
         self.content_layout.addWidget(self.top_bar)

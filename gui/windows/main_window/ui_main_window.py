@@ -17,7 +17,7 @@ class UIMainWindow(object):
             parent.setObjectName("MainWindow")
         
         # Setting the initial geometry
-        parent.resize(800, 450)
+        parent.resize(1024, 576)
         parent.setMinimumSize(QSize(800, 450))
         parent.setMaximumSize(QSize(1920, 1080))
 
@@ -31,7 +31,7 @@ class UIMainWindow(object):
 
         # Left menu frame
         self.left_menu = QFrame()
-        self.left_menu.setStyleSheet(f"background-color: {Color.LEFT_MENU};")
+        self.left_menu.setStyleSheet(f"background-color: {Color.LEFT_MENU}; border-right: 1px solid grey;")
         self.left_menu.setMaximumWidth(LEFT_MENU_WIDTH)
         self.left_menu.setMinimumWidth(LEFT_MENU_WIDTH)
 
@@ -54,6 +54,7 @@ class UIMainWindow(object):
         self.top_layout = QHBoxLayout(self.top_bar)
         self.top_layout.setContentsMargins(10, 0, 10, 0)
         self.top_layout.setSpacing(0)
+        self.top_layout.setAlignment(Qt.AlignVCenter)
         
         # Labels for this top bar
         self.top_label_left = QLabel("Home")

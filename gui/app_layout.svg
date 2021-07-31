@@ -7,7 +7,7 @@
    viewBox="0 0 359.83333 203.20001"
    version="1.1"
    id="svg5"
-   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   inkscape:version="1.1 (ce6663b3b7, 2021-05-25)"
    sodipodi:docname="app_layout.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -25,13 +25,13 @@
      showgrid="false"
      units="px"
      showguides="false"
-     inkscape:zoom="1.4823793"
-     inkscape:cx="173.70722"
-     inkscape:cy="15.178301"
-     inkscape:window-width="1920"
-     inkscape:window-height="1017"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
+     inkscape:zoom="0.74118965"
+     inkscape:cx="73.530438"
+     inkscape:cy="582.84678"
+     inkscape:window-width="1366"
+     inkscape:window-height="664"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1" />
   <defs
@@ -75,6 +75,13 @@
        height="13.229167"
        x="0"
        y="0" />
+    <rect
+       style="fill:#5599ff;stroke-width:0.264583"
+       id="rect45"
+       width="13.229167"
+       height="7.9375"
+       x="0"
+       y="195.26251" />
   </g>
   <g
      inkscape:groupmode="layer"

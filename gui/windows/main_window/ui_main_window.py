@@ -53,10 +53,10 @@ class UIMainWindow(object):
         # A version label
         self.version_label = QLabel("v1.0.0")
         self.version_label.setAlignment(Qt.AlignCenter)
-        self.version_label.setStyleSheet(f"blackground-color: ;color: {Color.BOT_BAR_TEXT}; font: 9pt 'Segoe UI';")
-        self.version_label.setMinimumSize(QSize(Dimension.LEFT_MENU_WIDTH, Dimension.BOTTOM_BAR_HEIGHT))
-        self.version_label.setMaximumSize(QSize(Dimension.LEFT_MENU_WIDTH, Dimension.BOTTOM_BAR_HEIGHT))
-        self.version_label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
+        self.version_label.setStyleSheet(f"background-color: {Color.VERSION_LABEL_BG};color: {Color.BOT_BAR_TEXT}; font: 9pt 'Segoe UI';")
+        self.version_label.setMinimumHeight(Dimension.BOTTOM_BAR_HEIGHT)
+        self.version_label.setMaximumHeight(Dimension.BOTTOM_BAR_HEIGHT)
+
 
         # Adding elements to the left_menu_layout
         self.left_menu_layout.addWidget(self.toggle_btn)

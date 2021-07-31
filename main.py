@@ -56,27 +56,30 @@ class MainWindow(QMainWindow):
 
     def show_sell(self):
         """Display the first page."""
-        self.clear_btn_active()
+        self.clear_btn_active(self)
         self.ui.sell_btn.is_active = True
         self.ui.pages.setCurrentWidget(self.ui.ui_pages.sell_page)
 
     def show_stock(self):
         """Display stock page."""
-        self.clear_btn_active()
+        self.clear_btn_active(self)
         self.ui.stock_btn.is_active = True
         self.ui.pages.setCurrentWidget(self.ui.ui_pages.stock_page)
     
     def show_about(self):
         """Display about page."""
-        self.clear_btn_active()
+        self.ui.sell_btn.is_active = False
+        self.ui.stock_btn.is_active = False
+        self.ui.about_btn.is_active = False
         self.ui.about_btn.is_active = True
         self.ui.pages.setCurrentWidget(self.ui.ui_pages.about_page)
     
-    def clear_btn_active(self):
+    def clear_btn_active(self, obj):
         """Deactivates all buttons."""
-        for button in (self.ui.sell_btn, self.ui.stock_btn, self.ui.about_btn):
-            button.is_active = False
-            log.debug(f"{button.objectName()} has 'is_active' = {button.is_active}")
+        log.debug("Deactivating all buttons")
+        self.ui.sell_btn.is_active = False
+        self.ui.stock_btn.is_active = False
+        self.ui.about_btn.is_active = False
 
         
 

@@ -42,10 +42,10 @@ class UIMainWindow(object):
         self.left_menu_layout.setSpacing(0)
 
         # Toggle, sell, stock buttons
-        self.toggle_btn = LeftMenuPushButton("    Hide menu", icon_path="gui/windows/main_window/toggle_icon_black.png")
-        self.sell_btn = LeftMenuPushButton("    Sell", icon_path="gui/windows/main_window/sell_icon_black.png", is_active=True)
-        self.stock_btn = LeftMenuPushButton("    Stock", icon_path="gui/windows/main_window/box_icon_black.png")
-        self.about_btn = LeftMenuPushButton("    About", icon_path="gui/windows/main_window/about_icon_black.png")
+        self.toggle_btn = LeftMenuPushButton("Hide menu", icon_path="hamburger_icon.svg")
+        self.sell_btn = LeftMenuPushButton("Sell", icon_path="sell_icon.svg", is_active=True)
+        self.stock_btn = LeftMenuPushButton("Stock", icon_path="box_icon.svg")
+        self.about_btn = LeftMenuPushButton("About", icon_path="about_icon.svg")
 
         # A spacer for the left menu
         self.left_menu_spacer = QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -53,7 +53,7 @@ class UIMainWindow(object):
         # A version label
         self.version_label = QLabel("v1.0.0")
         self.version_label.setAlignment(Qt.AlignCenter)
-        self.version_label.setStyleSheet(f"color: {Color.BOT_BAR_TEXT}; font: 9pt 'Segoe UI';")
+        self.version_label.setStyleSheet(f"blackground-color: ;color: {Color.BOT_BAR_TEXT}; font: 9pt 'Segoe UI';")
         self.version_label.setMinimumSize(QSize(Dimension.LEFT_MENU_WIDTH, Dimension.BOTTOM_BAR_HEIGHT))
         self.version_label.setMaximumSize(QSize(Dimension.LEFT_MENU_WIDTH, Dimension.BOTTOM_BAR_HEIGHT))
         self.version_label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
@@ -89,7 +89,7 @@ class UIMainWindow(object):
         
         # Labels for this top bar
         self.top_label_left = QLabel("Home")
-        self.top_label_left.setStyleSheet("font: 75 18pt 'Segoe UI';")
+        self.top_label_left.setStyleSheet("font: 75 16pt 'Segoe UI';")
         self.top_label_right = QLabel("| Inventory Project")
         self.top_label_right.setStyleSheet("font: 9pt 'Segoe UI'; text-align: right;")
 

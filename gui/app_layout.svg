@@ -25,15 +25,15 @@
      showgrid="false"
      units="px"
      showguides="false"
-     inkscape:zoom="0.74118967"
-     inkscape:cx="101.18867"
-     inkscape:cy="344.71608"
+     inkscape:zoom="1.4823793"
+     inkscape:cx="173.70722"
+     inkscape:cy="15.178301"
      inkscape:window-width="1920"
      inkscape:window-height="1017"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer3" />
+     inkscape:current-layer="layer1" />
   <defs
      id="defs2" />
   <g
@@ -67,6 +67,13 @@
        width="346.60419"
        height="13.229167"
        x="13.229167"
+       y="0" />
+    <rect
+       style="fill:#aaccff;stroke-width:0.264583"
+       id="rect881"
+       width="13.229167"
+       height="13.229167"
+       x="0"
        y="0" />
   </g>
   <g
@@ -110,17 +117,17 @@
          y="10.709136">Home</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:4.23333px;line-height:1.25;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI';stroke-width:0.264583;fill:#d5e5ff"
+       style="font-size:4.23333px;line-height:1.25;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI';stroke-width:0.264583;fill:#d7e3f4"
        x="14.992788"
        y="200.26082"
        id="text18361"><tspan
          sodipodi:role="line"
          id="tspan18359"
-         style="stroke-width:0.264583;fill:#d5e5ff"
+         style="stroke-width:0.264583;fill:#d7e3f4"
          x="14.992788"
          y="200.26082">Inventory project by KoteTheInnkeeper</tspan><tspan
          sodipodi:role="line"
-         style="stroke-width:0.264583;fill:#d5e5ff"
+         style="stroke-width:0.264583;fill:#d7e3f4"
          x="14.992788"
          y="205.55247"
          id="tspan20629" /></text>

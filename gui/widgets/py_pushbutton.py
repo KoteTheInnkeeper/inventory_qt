@@ -8,7 +8,7 @@ class LeftMenuPushButton(QPushButton):
         text: str="", 
         height: int=40, 
         minimum_width: int=50, 
-        text_padding: int=55, 
+        text_padding: int=10, 
         text_color: str=Color.BTN_TEXT, 
         icon_path: str="", 
         icon_color: str="#c3ccdf",
@@ -47,6 +47,7 @@ class LeftMenuPushButton(QPushButton):
             padding-left: {self.text_padding}px;
             text-align: left;
             border: none;
+            font: 75 12pt 'Segoe UI';
         }}
 
         QPushButton:hover {{
@@ -61,7 +62,7 @@ class LeftMenuPushButton(QPushButton):
         active_str =f"""
         QPushButton {{
             background-color: {self.btn_hover};
-            border-right: 5px solid #282a36;
+            border-right: 5px solid {Color.CONTENT_BACKGROUND};
         }}
         """
 
@@ -69,3 +70,6 @@ class LeftMenuPushButton(QPushButton):
             self.setStyleSheet(stylesheet_str)
         else:
             self.setStyleSheet(stylesheet_str + active_str)
+
+        self.setIcon(QIcon(self.icon_path))
+        self.setIconSize(QSize(30, 30))

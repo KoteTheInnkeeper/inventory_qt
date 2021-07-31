@@ -9,7 +9,7 @@ class Color:
     
     BTN_HOVER = "#aaccff"
     BTN_ACTIVE ="#5f8dd3"
-    BTN_TEXT = "#d7e3f4"
+    BTN_TEXT = "black"
     BTN_BG = LEFT_MENU
     BTN_PRESSED = LEFT_MENU
 

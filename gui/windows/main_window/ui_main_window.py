@@ -39,9 +39,9 @@ class UIMainWindow(object):
         self.left_menu_layout.setSpacing(0)
 
         # Toggle, sell and stock buttons
-        self.toggle_btn = LeftMenuPushButton("Hide menu")
-        self.home_btn = LeftMenuPushButton("Home")
-        self.stock_btn = LeftMenuPushButton("Stock")
+        self.toggle_btn = LeftMenuPushButton("    Hide menu", icon_path="gui/windows/main_window/toggle_icon_black.png")
+        self.home_btn = LeftMenuPushButton("    Home", icon_path="gui/windows/main_window/home_icon_black.png", is_active=True)
+        self.stock_btn = LeftMenuPushButton("    Stock", icon_path="gui/windows/main_window/box_icon_black.png")
 
         # A spacer for the left menu
         self.left_menu_spacer = QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding)

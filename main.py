@@ -28,6 +28,9 @@ class MainWindow(QMainWindow):
         # Toggle menu button
         self.ui.toggle_btn.clicked.connect(self.show_menu)
 
+        # Signals for each button to be clicked
+        self.ui.sell_btn.clicked.connect(self.show_sell)
+
         
 
         # Showing
@@ -50,6 +53,10 @@ class MainWindow(QMainWindow):
         self.animation.setEasingCurve(QEasingCurve.InOutCirc)
         self.animation.start()
 
+    def show_sell(self):
+        """Display the first page."""
+        self.ui.sell_btn.is_active = True
+        self.ui.pages.currentWidget(self.ui.ui_pages.sell_page)
         
 
 

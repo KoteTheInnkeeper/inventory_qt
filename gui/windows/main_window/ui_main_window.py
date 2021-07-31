@@ -2,7 +2,10 @@ import logging
 
 from gui.gui_constants import Color, Dimension
 from qt_core import *
+
+# Importing custom widgets
 from gui.widgets.py_pushbutton import LeftMenuPushButton
+from gui.widgets.ui_stacked_widget import UIStackedPages
 
 log = logging.getLogger("inventory_qt.ui_main_window")
 
@@ -35,13 +38,14 @@ class UIMainWindow(object):
         
         # Left menu layout
         self.left_menu_layout = QVBoxLayout(self.left_menu)
-        self.left_menu_layout.setContentsMargins(0, 0, 0, 10)
+        self.left_menu_layout.setContentsMargins(0, 0, 0, 0)
         self.left_menu_layout.setSpacing(0)
 
-        # Toggle, sell and stock buttons
+        # Toggle, sell, stock buttons
         self.toggle_btn = LeftMenuPushButton("    Hide menu", icon_path="gui/windows/main_window/toggle_icon_black.png")
-        self.home_btn = LeftMenuPushButton("    Home", icon_path="gui/windows/main_window/home_icon_black.png", is_active=True)
+        self.sell_btn = LeftMenuPushButton("    Sell", icon_path="gui/windows/main_window/sell_icon_black.png", is_active=True)
         self.stock_btn = LeftMenuPushButton("    Stock", icon_path="gui/windows/main_window/box_icon_black.png")
+        self.about_btn = LeftMenuPushButton("    About", icon_path="gui/windows/main_window/about_icon_black.png")
 
         # A spacer for the left menu
         self.left_menu_spacer = QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -50,12 +54,16 @@ class UIMainWindow(object):
         self.version_label = QLabel("v1.0.0")
         self.version_label.setAlignment(Qt.AlignCenter)
         self.version_label.setStyleSheet(f"color: {Color.BOT_BAR_TEXT}; font: 9pt 'Segoe UI';")
+        self.version_label.setMinimumSize(QSize(Dimension.LEFT_MENU_WIDTH, Dimension.BOTTOM_BAR_HEIGHT))
+        self.version_label.setMaximumSize(QSize(Dimension.LEFT_MENU_WIDTH, Dimension.BOTTOM_BAR_HEIGHT))
+        self.version_label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Maximum)
 
         # Adding elements to the left_menu_layout
         self.left_menu_layout.addWidget(self.toggle_btn)
-        self.left_menu_layout.addWidget(self.home_btn)
+        self.left_menu_layout.addWidget(self.sell_btn)
         self.left_menu_layout.addWidget(self.stock_btn)
         self.left_menu_layout.addItem(self.left_menu_spacer)
+        self.left_menu_layout.addWidget(self.about_btn)
         self.left_menu_layout.addWidget(self.version_label)
 
         # Content frame
@@ -93,9 +101,13 @@ class UIMainWindow(object):
         self.top_layout.addItem(self.top_spacer)
         self.top_layout.addWidget(self.top_label_right)
         
-        # Pages widget
+        # StackedPages widget
         self.pages = QStackedWidget()
         self.pages.setStyleSheet("font-size: 12pt; color: #0b2817;")
+        # Pages
+        self.ui_pages = UIStackedPages()
+        self.ui_pages.setupUi(self.pages)
+        self.pages.setCurrentWidget(self.ui_pages.sell_page)
 
         # Bot bar frame
         self.bot_bar = QFrame()

@@ -1,6 +1,11 @@
 import sys
 import logging
 
+# Erasing previous log
+with open('log.log', 'w'):
+    pass
+
+
 # Setting logger.
 logging.basicConfig(format="%(asctime)s %(levelname)-8s [%(filename)s:%(funcName)s:%(lineno)d] %(message)s", level=logging.DEBUG,
                     filename='log.log')
@@ -10,6 +15,9 @@ log = logging.getLogger("inventory_qt")
 from qt_core import *
 from gui.windows.main_window.ui_main_window import UIMainWindow
 from gui.gui_constants import *
+
+# Database imports
+from data.data import Database
 
 # Main window, the one we show.
 

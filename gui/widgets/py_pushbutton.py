@@ -78,37 +78,37 @@ class LeftMenuPushButton(QPushButton):
 
     def paintEvent(self, event):
         """Custom paintEvent for this custom button."""
-        log.debug("Painting the button.")
+        # Painting button
         QPushButton.paintEvent(self, event)
 
-        log.debug("Creating QPainter object.")
+        # Creating a QPainter object
         qp = QPainter()
         qp.begin(self)
         qp.setRenderHint(QPainter.Antialiasing)
         qp.setPen(Qt.NoPen)
 
-        log.debug("Creating a rectangle reference for our icon.")
+        # Creating a rectangle for reference for our icon
         rect = QRect(0, 0, self.minimum_width, self.minimumHeight())
 
-        log.debug("Drawing the icon")
+        # Drawing the icon
         self.draw_icon(qp, self.icon_path, rect, self.icon_color)
 
         qp.end()
 
     def draw_icon(self, qp: QPainter, image: str, rect: QRect, color: str):
-        log.debug(f"Formatting the path for {image}.")
+        # Formatting the path for the image
         app_path = os.path.abspath(os.getcwd())
         folder = 'gui/images/icons'
         path = os.path.join(app_path, folder)
         icon_path = os.path.normpath(os.path.join(path, image))
 
-        log.debug("Drawing the icon.")
+        # Drawing the icon
         icon = QPixmap(icon_path)
         painter = QPainter(icon)
         painter.setCompositionMode(QPainter.CompositionMode_SourceIn)
         painter.fillRect(icon.rect(), color)
         
-        log.debug("Drawing pixmap.")
+        # Drawing pixmap
         qp.drawPixmap(
             (rect.width() - icon.width()) / 2,
             (rect.height() - icon.height()) / 2,

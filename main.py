@@ -2,7 +2,7 @@ import sys
 import logging
 
 # Setting logger.
-logging.basicConfig(format="%(asctime)s %(levelname)-8s [%(filename)s:%(funcName)s:%(lineno)d] %(message)s", level=logging.WARNING,
+logging.basicConfig(format="%(asctime)s %(levelname)-8s [%(filename)s:%(funcName)s:%(lineno)d] %(message)s", level=logging.DEBUG,
                     filename='log.log')
 
 log = logging.getLogger("inventory_qt")
@@ -31,10 +31,7 @@ class MainWindow(QMainWindow):
         # Signals for each button to be clicked
         self.ui.sell_btn.clicked.connect(self.show_sell)
         self.ui.stock_btn.clicked.connect(self.show_stock)
-
-        # Buttons
-        self.buttons = (self.ui.sell_btn, self.ui.stock_btn, self.ui.about_btn)
-        
+     
 
         # Showing
         self.show()
@@ -70,8 +67,9 @@ class MainWindow(QMainWindow):
     
     def clear_btn_active(self):
         """Deactivates all buttons."""
-        for button in self.buttons:
+        for button in (self.ui.sell_btn, self.ui.stock_btn, self.ui.about_btn):
             button.is_active = False
+            log.debug(f"{button.objectName()} has 'is_active' = {button.is_active}")
 
         
 

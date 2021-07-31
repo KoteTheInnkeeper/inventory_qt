@@ -6,4 +6,4 @@
 *.xml
 
 # log
-*.log
+log.log

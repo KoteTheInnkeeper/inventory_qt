@@ -30,7 +30,10 @@ class MainWindow(QMainWindow):
 
         # Signals for each button to be clicked
         self.ui.sell_btn.clicked.connect(self.show_sell)
+        self.ui.stock_btn.clicked.connect(self.show_stock)
 
+        # Buttons
+        self.buttons = (self.ui.sell_btn, self.ui.stock_btn, self.ui.about_btn)
         
 
         # Showing
@@ -55,8 +58,21 @@ class MainWindow(QMainWindow):
 
     def show_sell(self):
         """Display the first page."""
+        self.clear_btn_active()
         self.ui.sell_btn.is_active = True
-        self.ui.pages.currentWidget(self.ui.ui_pages.sell_page)
+        self.ui.pages.setCurrentWidget(self.ui.ui_pages.sell_page)
+
+    def show_stock(self):
+        """Display stock page."""
+        self.clear_btn_active()
+        self.ui.stock_btn.is_active = True
+        self.ui.pages.setCurrentWidget(self.ui.ui_pages.stock_page)
+    
+    def clear_btn_active(self):
+        """Deactivates all buttons."""
+        for button in self.buttons:
+            button.is_active = False
+
         
 
 

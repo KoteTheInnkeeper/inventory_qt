@@ -5,6 +5,7 @@ import os
 
 log = logging.getLogger("inventory_qt.data")
 
+
 class Database:
     def __init__(self, host: str) -> None:
         # Establishing the path
@@ -15,11 +16,6 @@ class Database:
         # Check file and creates it if it doesn't exist.
         if not self.check_file():
             pass
-
-        
-
-        
-
 
     def check_file(self) -> bool:
         """Checks if the database exists and returns True or False."""
@@ -35,7 +31,7 @@ class Database:
                 self.setup_tables()
             except Exception:
                 log.critical("An exception was raised.")
-            
+                raise
 
     def setup_tables(self) -> True:
         try:
@@ -49,13 +45,12 @@ class Database:
         else:
             log.info("Tables are set up.")
 
-        
-
-
     def db_path(self, host: str) -> str:
         """Returns the absolute path for the database file provided."""
         app_path = os.path.abspath(os.getcwd())
         folder = 'data'
         path = os.path.join(app_path, folder)
         return os.path.normpath(os.path.join(path, host))
+
+
 

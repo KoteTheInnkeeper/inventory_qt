@@ -4,6 +4,8 @@ import os
 from qt_core import *
 from gui.gui_constants import Color, Dimension
 
+from utils.errors import *
+
 log = logging.getLogger("inventory_qt.py_pushbutton")
 
 
@@ -79,6 +81,7 @@ class LeftMenuPushButton(QPushButton):
     def paintEvent(self, event):
         """Custom paintEvent for this custom button."""
         # Painting button
+        log.debug("Inside paint event")
         QPushButton.paintEvent(self, event)
 
         # Creating a QPainter object
@@ -115,3 +118,4 @@ class LeftMenuPushButton(QPushButton):
             icon
         )
         painter.end()
+

@@ -51,7 +51,7 @@ class MainWindow(QMainWindow):
 
         width = Dimension.LEFT_MENU_WIDTH
         if menu_width == 50:
-            width = 240
+            width = 200
         
         # Start animation
         self.animation = QPropertyAnimation(self.ui.left_menu, b"minimumWidth")
@@ -63,32 +63,18 @@ class MainWindow(QMainWindow):
 
     def show_sell(self):
         """Display the first page."""
-        self.clear_btn_active(self)
-        self.ui.sell_btn.is_active = True
+        self.ui.top_label_left.setText("Sell")
         self.ui.pages.setCurrentWidget(self.ui.ui_pages.sell_page)
 
     def show_stock(self):
         """Display stock page."""
-        self.clear_btn_active(self)
-        self.ui.stock_btn.is_active = True
+        self.ui.top_label_left.setText("Stock")
         self.ui.pages.setCurrentWidget(self.ui.ui_pages.stock_page)
     
     def show_about(self):
         """Display about page."""
-        self.ui.sell_btn.is_active = False
-        self.ui.stock_btn.is_active = False
-        self.ui.about_btn.is_active = False
-        self.ui.about_btn.is_active = True
+        self.ui.top_label_left.setText("About")
         self.ui.pages.setCurrentWidget(self.ui.ui_pages.about_page)
-    
-    def clear_btn_active(self, obj):
-        """Deactivates all buttons."""
-        log.debug("Deactivating all buttons")
-        self.ui.sell_btn.is_active = False
-        self.ui.stock_btn.is_active = False
-        self.ui.about_btn.is_active = False
-
-        
 
 
 if __name__ == '__main__':

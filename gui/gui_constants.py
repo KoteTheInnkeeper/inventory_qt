@@ -1,15 +1,16 @@
 class Color:
-    CONTENT_BACKGROUND = "#d7e3f4"
-    LEFT_MENU = "#3771c8"
-    VERSION_LABEL_BG = "#5599ff"
-    TOP_BAR = "#87aade"
-    BOT_BAR = "#87aade"
+    CONTENT_BACKGROUND = "#ffffff"
+    LEFT_MENU = "#0784b5"
+    VERSION_LABEL_BG = "#39ace7"
+    VERSION_LABEL_TEXT = "black"
+    TOP_BAR = "#9bd4e4"
+    BOT_BAR = "#9bd4e4"
     
     TOP_BAR_FONT = "#162d50"
-    BOT_BAR_TEXT = "#d7e3f4"
+    BOT_BAR_TEXT = "black"
     
     BTN_HOVER = "#aaccff"
-    BTN_ACTIVE ="#5f8dd3"
+    BTN_ACTIVE ="#cadeef"
     BTN_TEXT = "black"
     BTN_BG = LEFT_MENU
     BTN_PRESSED = LEFT_MENU

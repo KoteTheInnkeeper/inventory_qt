@@ -41,7 +41,6 @@ class MainWindow(QMainWindow):
         self.ui.stock_btn.clicked.connect(self.show_stock)
         self.ui.about_btn.clicked.connect(self.show_about)
      
-
         # Showing
         self.show()
     

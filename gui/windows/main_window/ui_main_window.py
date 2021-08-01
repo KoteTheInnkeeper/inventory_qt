@@ -43,7 +43,7 @@ class UIMainWindow(object):
 
         # Toggle, sell, stock buttons
         self.toggle_btn = LeftMenuPushButton("Hide menu", icon_path="hamburger_icon.svg")
-        self.sell_btn = LeftMenuPushButton("Sell", icon_path="sell_icon.svg", is_active=True)
+        self.sell_btn = LeftMenuPushButton("Sell", icon_path="sell_icon.svg")
         self.stock_btn = LeftMenuPushButton("Stock", icon_path="box_icon.svg")
         self.about_btn = LeftMenuPushButton("About", icon_path="about_icon.svg")
 
@@ -53,7 +53,7 @@ class UIMainWindow(object):
         # A version label
         self.version_label = QLabel("v1.0.0")
         self.version_label.setAlignment(Qt.AlignCenter)
-        self.version_label.setStyleSheet(f"background-color: {Color.VERSION_LABEL_BG};color: {Color.BOT_BAR_TEXT}; font: 9pt 'Segoe UI';")
+        self.version_label.setStyleSheet(f"background-color: {Color.VERSION_LABEL_BG};color: {Color.VERSION_LABEL_TEXT}; font: 75 9pt 'Segoe UI';")
         self.version_label.setMinimumHeight(Dimension.BOTTOM_BAR_HEIGHT)
         self.version_label.setMaximumHeight(Dimension.BOTTOM_BAR_HEIGHT)
 

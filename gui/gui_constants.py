@@ -1,21 +1,24 @@
 class Color:
     CONTENT_BACKGROUND = "#ffffff"
-    LEFT_MENU = "#0784b5"
-    VERSION_LABEL_BG = "#39ace7"
-    VERSION_LABEL_TEXT = "black"
-    TOP_BAR = "#9bd4e4"
-    BOT_BAR = "#9bd4e4"
+    CONTENT_TEXT = "#484848"
     
-    TOP_BAR_FONT = "#162d50"
-    BOT_BAR_TEXT = "black"
-    
+    LEFT_MENU = "#86a9c6"
+    VERSION_LABEL_BG = "#e5f0f9"
+    VERSION_LABEL_TEXT = "#484848"
     BTN_HOVER = "#aaccff"
-    BTN_ACTIVE ="#cadeef"
-    BTN_TEXT = "black"
+    BTN_ACTIVE = "#b1cef0"
+    BTN_ACTIVE_BORDER = "#325a9f"
+    BTN_TEXT = "#4b4b4b"
     BTN_BG = LEFT_MENU
     BTN_PRESSED = LEFT_MENU
 
+    TOP_BAR = "#d8e7f8"
+    TOP_BAR_FONT = "#555761"
+    TOP_BAR_BORDER = "#e5e5e8"
     
+    BOT_BAR = "#e5f0f9"   
+    BOT_BAR_TEXT = TOP_BAR_FONT
+       
 
 class Dimension:
     TOP_BAR_HEIGHT = 30

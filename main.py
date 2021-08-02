@@ -40,9 +40,22 @@ class MainWindow(QMainWindow):
         self.ui.sell_btn.clicked.connect(self.show_sell)
         self.ui.stock_btn.clicked.connect(self.show_stock)
         self.ui.about_btn.clicked.connect(self.show_about)
-     
+
+        # Showing the sell first
+        self.show_sell()
+
         # Showing
         self.show()
+
+    def clear_btns(self):
+        """Sets all button's 'is_active' parameter to False."""
+        log.debug("Clearing all buttons.")
+        for btn in self.ui.left_menu.findChildren(QPushButton):
+            try:
+                btn.set_active(False)
+            except Exception:
+                log.critical("An exception was raised.")
+                raise
     
     def show_menu(self):
         """An animation to show the left menu."""
@@ -63,16 +76,22 @@ class MainWindow(QMainWindow):
 
     def show_sell(self):
         """Display the first page."""
+        self.clear_btns()
+        self.ui.sell_btn.set_active(True)
         self.ui.top_label_left.setText("Sell")
         self.ui.pages.setCurrentWidget(self.ui.ui_pages.sell_page)
 
     def show_stock(self):
         """Display stock page."""
+        self.clear_btns()
+        self.ui.stock_btn.set_active(True)
         self.ui.top_label_left.setText("Stock")
         self.ui.pages.setCurrentWidget(self.ui.ui_pages.stock_page)
     
     def show_about(self):
         """Display about page."""
+        self.clear_btns()
+        self.ui.about_btn.set_active(True)
         self.ui.top_label_left.setText("About")
         self.ui.pages.setCurrentWidget(self.ui.ui_pages.about_page)
 

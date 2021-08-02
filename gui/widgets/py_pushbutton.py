@@ -22,6 +22,11 @@ class LeftMenuPushButton(QPushButton):
         btn_color: str=Color.BTN_BG, 
         btn_hover: str=Color.BTN_HOVER,
         btn_pressed :str=Color.BTN_PRESSED,
+        btn_active: str=Color.BTN_ACTIVE,
+        btn_active_border_right: str=Color.BTN_ACTIVE,
+        btn_active_border_left: str=Color.BTN_ACTIVE,
+        btn_active_border_bot: str=Color.BTN_ACTIVE,
+        btn_active_border_top: str=Color.BTN_ACTIVE,
         is_active: bool= False
     ):
         super().__init__()
@@ -41,6 +46,11 @@ class LeftMenuPushButton(QPushButton):
         self.btn_color = btn_color
         self.btn_hover = btn_hover
         self.btn_pressed = btn_pressed
+        self.btn_active = btn_active
+        self.btn_active_border_left = btn_active_border_left
+        self.btn_active_border_top = btn_active_border_top
+        self.btn_active_border_right = btn_active_border_right
+        self.btn_active_border_bot = btn_active_border_bot
         self.is_active = is_active
 
         # Set stylesheet according to what we've entered.
@@ -68,8 +78,11 @@ class LeftMenuPushButton(QPushButton):
 
         active_str =f"""
         QPushButton {{
-            background-color: {self.btn_hover};
-            border-right: 5px solid {Color.CONTENT_BACKGROUND};
+            background-color: {self.btn_active};
+            border-left: 5px solid {self.btn_active_border_left};
+            border-top: 5px solid {self.btn_active_border_top};
+            border-right: 5px solid {self.btn_active_border_right};
+            border-bottom: 5px solid {self.btn_active_border_bot};
         }}
         """
 
@@ -118,4 +131,10 @@ class LeftMenuPushButton(QPushButton):
             icon
         )
         painter.end()
+
+    def set_active(self, active: bool):
+        """Sets the 'is_active' parameter to whatever the 'active' parameter eavluates to."""
+        log.debug(f"Setting the {self.objectName()} from {self.is_active} to {active}.")
+        self.is_active = active
+        self.set_style()
 

@@ -42,8 +42,8 @@ class UIMainWindow(object):
         self.left_menu_layout.setSpacing(0)
 
         # Toggle, sell, stock buttons
-        self.toggle_btn = LeftMenuPushButton("Hide menu", icon_path="hamburger_icon.svg")
-        self.sell_btn = LeftMenuPushButton("Sell", icon_path="sell_icon.svg")
+        self.toggle_btn = LeftMenuPushButton("Hide menu", icon_path="hamburger_icon.svg", btn_active_border_right=Color.BTN_ACTIVE_BORDER)
+        self.sell_btn = LeftMenuPushButton("Sell", icon_path="sell_icon.svg", is_active=True)
         self.stock_btn = LeftMenuPushButton("Stock", icon_path="box_icon.svg")
         self.about_btn = LeftMenuPushButton("About", icon_path="about_icon.svg")
 
@@ -79,7 +79,7 @@ class UIMainWindow(object):
         self.top_bar = QFrame()
         self.top_bar.setMinimumHeight(Dimension.TOP_BAR_HEIGHT)
         self.top_bar.setMaximumHeight(Dimension.TOP_BAR_HEIGHT)
-        self.top_bar.setStyleSheet(f"background-color: {Color.TOP_BAR}; color: #162d50;")
+        self.top_bar.setStyleSheet(f"background-color: {Color.TOP_BAR}; color: {Color.TOP_BAR_FONT};")
         
         # A top bar layout to organize the labels
         self.top_layout = QHBoxLayout(self.top_bar)
@@ -88,7 +88,7 @@ class UIMainWindow(object):
         self.top_layout.setAlignment(Qt.AlignVCenter)
         
         # Labels for this top bar
-        self.top_label_left = QLabel("Home")
+        self.top_label_left = QLabel("")
         self.top_label_left.setStyleSheet("font: 75 16pt 'Segoe UI';")
         self.top_label_right = QLabel("| Inventory Project")
         self.top_label_right.setStyleSheet("font: 9pt 'Segoe UI'; text-align: right;")
@@ -103,7 +103,7 @@ class UIMainWindow(object):
         
         # StackedPages widget
         self.pages = QStackedWidget()
-        self.pages.setStyleSheet("font-size: 12pt; color: #0b2817;")
+        self.pages.setStyleSheet(f"font-size: 12pt; color: {Color.CONTENT_TEXT};")
         # Pages
         self.ui_pages = UIStackedPages()
         self.ui_pages.setupUi(self.pages)

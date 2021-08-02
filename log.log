@@ -1,11 +1,217 @@
-2021-08-02 09:54:51,119 DEBUG    [ui_main_window.py:setup_ui:16] Naming this window if it doesn't have a name.
-2021-08-02 09:54:51,147 DEBUG    [main.py:clear_btns:52] Clearing all buttons.
-2021-08-02 09:54:51,147 DEBUG    [py_pushbutton.py:set_active:137] Setting the  from False to False.
-2021-08-02 09:54:51,147 DEBUG    [py_pushbutton.py:set_active:137] Setting the  from True to False.
-2021-08-02 09:54:51,147 DEBUG    [py_pushbutton.py:set_active:137] Setting the  from False to False.
-2021-08-02 09:54:51,147 DEBUG    [py_pushbutton.py:set_active:137] Setting the  from False to False.
-2021-08-02 09:54:51,147 DEBUG    [py_pushbutton.py:set_active:137] Setting the  from False to True.
-2021-08-02 09:54:51,271 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
-2021-08-02 09:54:51,310 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
-2021-08-02 09:54:51,313 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
-2021-08-02 09:54:51,317 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:36,297 DEBUG    [ui_main_window.py:setup_ui:16] Naming this window if it doesn't have a name.
+2021-08-02 17:44:36,324 DEBUG    [main.py:clear_btns:57] Clearing all buttons.
+2021-08-02 17:44:36,325 DEBUG    [py_pushbutton.py:set_active:137] Setting the  from False to False.
+2021-08-02 17:44:36,325 DEBUG    [py_pushbutton.py:set_active:137] Setting the  from True to False.
+2021-08-02 17:44:36,325 DEBUG    [py_pushbutton.py:set_active:137] Setting the  from False to False.
+2021-08-02 17:44:36,325 DEBUG    [py_pushbutton.py:set_active:137] Setting the  from False to False.
+2021-08-02 17:44:36,325 DEBUG    [py_pushbutton.py:set_active:137] Setting the  from False to True.
+2021-08-02 17:44:36,463 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:36,496 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:36,504 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:36,509 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:37,154 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:37,218 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:37,219 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:37,307 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:37,307 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:37,401 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:37,403 DEBUG    [main.py:clear_btns:57] Clearing all buttons.
+2021-08-02 17:44:37,403 DEBUG    [py_pushbutton.py:set_active:137] Setting the  from False to False.
+2021-08-02 17:44:37,403 DEBUG    [py_pushbutton.py:set_active:137] Setting the  from True to False.
+2021-08-02 17:44:37,404 DEBUG    [py_pushbutton.py:set_active:137] Setting the  from False to False.
+2021-08-02 17:44:37,404 DEBUG    [py_pushbutton.py:set_active:137] Setting the  from False to False.
+2021-08-02 17:44:37,405 DEBUG    [py_pushbutton.py:set_active:137] Setting the  from False to True.
+2021-08-02 17:44:37,406 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:37,407 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:37,408 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:37,409 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:37,537 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:37,539 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:37,618 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:37,619 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:37,730 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:37,731 DEBUG    [main.py:clear_btns:57] Clearing all buttons.
+2021-08-02 17:44:37,731 DEBUG    [py_pushbutton.py:set_active:137] Setting the  from False to False.
+2021-08-02 17:44:37,731 DEBUG    [py_pushbutton.py:set_active:137] Setting the  from True to False.
+2021-08-02 17:44:37,732 DEBUG    [py_pushbutton.py:set_active:137] Setting the  from False to False.
+2021-08-02 17:44:37,732 DEBUG    [py_pushbutton.py:set_active:137] Setting the  from False to False.
+2021-08-02 17:44:37,733 DEBUG    [py_pushbutton.py:set_active:137] Setting the  from False to True.
+2021-08-02 17:44:37,735 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:37,736 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:37,736 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:37,738 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:37,745 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:37,748 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:38,380 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:38,381 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:39,011 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:39,012 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:39,323 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:39,324 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:39,407 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:39,409 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:39,490 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:39,491 DEBUG    [main.py:clear_btns:57] Clearing all buttons.
+2021-08-02 17:44:39,491 DEBUG    [py_pushbutton.py:set_active:137] Setting the  from False to False.
+2021-08-02 17:44:39,491 DEBUG    [py_pushbutton.py:set_active:137] Setting the  from False to False.
+2021-08-02 17:44:39,492 DEBUG    [py_pushbutton.py:set_active:137] Setting the  from True to False.
+2021-08-02 17:44:39,492 DEBUG    [py_pushbutton.py:set_active:137] Setting the  from False to False.
+2021-08-02 17:44:39,492 DEBUG    [py_pushbutton.py:set_active:137] Setting the  from False to True.
+2021-08-02 17:44:39,495 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:39,496 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:39,497 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:39,497 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:39,570 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:39,570 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:39,926 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:39,928 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:40,002 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:40,003 DEBUG    [main.py:clear_btns:57] Clearing all buttons.
+2021-08-02 17:44:40,003 DEBUG    [py_pushbutton.py:set_active:137] Setting the  from False to False.
+2021-08-02 17:44:40,003 DEBUG    [py_pushbutton.py:set_active:137] Setting the  from True to False.
+2021-08-02 17:44:40,004 DEBUG    [py_pushbutton.py:set_active:137] Setting the  from False to False.
+2021-08-02 17:44:40,004 DEBUG    [py_pushbutton.py:set_active:137] Setting the  from False to False.
+2021-08-02 17:44:40,004 DEBUG    [py_pushbutton.py:set_active:137] Setting the  from False to True.
+2021-08-02 17:44:40,007 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:40,008 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:40,009 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:40,010 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:40,013 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:40,014 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:40,308 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:40,891 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:41,033 DEBUG    [py_pushbutton.py:paintEvent:97] Inside paint event
+2021-08-02 17:44:41,036 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:41,121 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:41,122 DEBUG    [main.py:clear_btns:57] Clearing all buttons.
+2021-08-02 17:44:41,123 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from False to False.
+2021-08-02 17:44:41,123 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from False to False.
+2021-08-02 17:44:41,123 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from False to True.
+2021-08-02 17:44:41,124 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:41,125 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:41,169 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:41,170 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:41,444 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:41,447 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:41,513 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:41,514 DEBUG    [main.py:clear_btns:57] Clearing all buttons.
+2021-08-02 17:44:41,514 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from False to False.
+2021-08-02 17:44:41,515 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from True to False.
+2021-08-02 17:44:41,516 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from False to True.
+2021-08-02 17:44:41,516 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:41,517 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:41,674 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:41,676 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:41,829 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:41,884 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,014 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,015 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,073 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,074 DEBUG    [main.py:clear_btns:57] Clearing all buttons.
+2021-08-02 17:44:42,075 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from True to False.
+2021-08-02 17:44:42,075 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from False to False.
+2021-08-02 17:44:42,075 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from False to True.
+2021-08-02 17:44:42,076 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,077 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,170 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,171 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,219 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,220 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,306 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,308 DEBUG    [main.py:clear_btns:57] Clearing all buttons.
+2021-08-02 17:44:42,308 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from False to False.
+2021-08-02 17:44:42,308 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from True to False.
+2021-08-02 17:44:42,309 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from False to True.
+2021-08-02 17:44:42,310 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,311 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,362 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,363 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,443 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,444 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,530 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,531 DEBUG    [main.py:clear_btns:57] Clearing all buttons.
+2021-08-02 17:44:42,531 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from True to False.
+2021-08-02 17:44:42,532 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from False to False.
+2021-08-02 17:44:42,532 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from False to True.
+2021-08-02 17:44:42,533 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,534 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,554 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,556 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,635 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,636 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,722 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,723 DEBUG    [main.py:clear_btns:57] Clearing all buttons.
+2021-08-02 17:44:42,723 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from False to False.
+2021-08-02 17:44:42,724 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from True to False.
+2021-08-02 17:44:42,724 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from False to True.
+2021-08-02 17:44:42,725 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,727 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,755 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,756 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,812 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,813 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,890 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,891 DEBUG    [main.py:clear_btns:57] Clearing all buttons.
+2021-08-02 17:44:42,891 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from True to False.
+2021-08-02 17:44:42,891 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from False to False.
+2021-08-02 17:44:42,892 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from False to True.
+2021-08-02 17:44:42,893 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,893 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,930 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:42,930 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,003 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,004 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,082 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,083 DEBUG    [main.py:clear_btns:57] Clearing all buttons.
+2021-08-02 17:44:43,083 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from False to False.
+2021-08-02 17:44:43,084 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from True to False.
+2021-08-02 17:44:43,084 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from False to True.
+2021-08-02 17:44:43,085 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,086 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,098 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,099 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,179 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,180 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,259 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,260 DEBUG    [main.py:clear_btns:57] Clearing all buttons.
+2021-08-02 17:44:43,260 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from True to False.
+2021-08-02 17:44:43,261 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from False to False.
+2021-08-02 17:44:43,261 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from False to True.
+2021-08-02 17:44:43,262 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,263 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,290 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,291 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,356 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,357 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,442 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,443 DEBUG    [main.py:clear_btns:57] Clearing all buttons.
+2021-08-02 17:44:43,443 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from False to False.
+2021-08-02 17:44:43,444 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from True to False.
+2021-08-02 17:44:43,444 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from False to True.
+2021-08-02 17:44:43,445 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,446 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,482 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,483 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,531 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,532 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,610 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,611 DEBUG    [main.py:clear_btns:57] Clearing all buttons.
+2021-08-02 17:44:43,611 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from True to False.
+2021-08-02 17:44:43,611 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from False to False.
+2021-08-02 17:44:43,612 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from False to True.
+2021-08-02 17:44:43,613 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,614 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,650 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,651 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,716 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,717 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,786 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,787 DEBUG    [main.py:clear_btns:57] Clearing all buttons.
+2021-08-02 17:44:43,787 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from False to False.
+2021-08-02 17:44:43,787 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from True to False.
+2021-08-02 17:44:43,788 DEBUG    [py_pushbutton.py:set_active:266] Setting the  from False to True.
+2021-08-02 17:44:43,789 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,790 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,842 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,843 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event
+2021-08-02 17:44:43,858 DEBUG    [py_pushbutton.py:paintEvent:226] Inside paint event

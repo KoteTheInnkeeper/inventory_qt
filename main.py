@@ -41,16 +41,21 @@ class MainWindow(QMainWindow):
         self.ui.stock_btn.clicked.connect(self.show_stock)
         self.ui.about_btn.clicked.connect(self.show_about)
 
-        # Showing the sell first
+        # Signals for each minor button
+        self.ui.ui_pages.add_buy_btn.clicked.connect(self.show_add_stock)
+        self.ui.ui_pages.show_stock_btn.clicked.connect(self.show_stock_list)
+
+
+        # Showing the sell page first
         self.show_sell()
 
         # Showing
         self.show()
 
-    def clear_btns(self):
+    def clear_btns(self, frame: QFrame):
         """Sets all button's 'is_active' parameter to False."""
         log.debug("Clearing all buttons.")
-        for btn in self.ui.left_menu.findChildren(QPushButton):
+        for btn in frame.findChildren(QPushButton):
             try:
                 btn.set_active(False)
             except Exception:
@@ -64,7 +69,7 @@ class MainWindow(QMainWindow):
 
         width = Dimension.LEFT_MENU_WIDTH
         if menu_width == 50:
-            width = 200
+            width = Dimension.LEFT_MENU_EXPANDED_WIDTH
         
         # Start animation
         self.animation = QPropertyAnimation(self.ui.left_menu, b"minimumWidth")
@@ -76,25 +81,34 @@ class MainWindow(QMainWindow):
 
     def show_sell(self):
         """Display the first page."""
-        self.clear_btns()
+        self.clear_btns(self.ui.left_menu)
         self.ui.sell_btn.set_active(True)
         self.ui.top_label_left.setText("Sell")
         self.ui.pages.setCurrentWidget(self.ui.ui_pages.sell_page)
 
     def show_stock(self):
         """Display stock page."""
-        self.clear_btns()
+        self.clear_btns(self.ui.left_menu)
         self.ui.stock_btn.set_active(True)
         self.ui.top_label_left.setText("Stock")
         self.ui.pages.setCurrentWidget(self.ui.ui_pages.stock_page)
     
     def show_about(self):
         """Display about page."""
-        self.clear_btns()
+        self.clear_btns(self.ui.left_menu)
         self.ui.about_btn.set_active(True)
         self.ui.top_label_left.setText("About")
         self.ui.pages.setCurrentWidget(self.ui.ui_pages.about_page)
 
+    def show_add_stock(self):
+        """"Displays the add stock page."""
+        self.clear_btns(self.ui.ui_pages.stock_menu)
+        self.ui.ui_pages.add_buy_btn.set_active(True)
+    
+    def show_stock_list(self):
+        """"Displays the add stock page."""
+        self.clear_btns(self.ui.ui_pages.stock_menu)
+        self.ui.ui_pages.show_stock_btn.set_active(True)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

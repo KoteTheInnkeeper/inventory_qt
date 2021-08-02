@@ -1,5 +1,5 @@
 class Color:
-    CONTENT_BACKGROUND = "#ffffff"
+    CONTENT_BACKGROUND = "#fbfbfb"
     CONTENT_TEXT = "#484848"
     
     LEFT_MENU = "#86a9c6"
@@ -18,7 +18,14 @@ class Color:
     
     BOT_BAR = "#e5f0f9"   
     BOT_BAR_TEXT = TOP_BAR_FONT
-       
+
+    STOCK_LEFT_MENU = "#f2f2f2"
+
+    MINOR_BTN_BG = STOCK_LEFT_MENU
+    MINOR_BTN_ACTIVE = "#f2f2f2"
+    MINOR_BTN_HOVER = BTN_HOVER
+    MINOR_BTN_PRESSED = BTN_PRESSED
+
 
 class Dimension:
     TOP_BAR_HEIGHT = 30
@@ -29,3 +36,7 @@ class Dimension:
     BTN_TEXT_PADDING = 55
     BTN_WIDTH = LEFT_MENU_WIDTH
 
+    LEFT_MENU_EXPANDED_WIDTH = 150
+
+    STOCK_LEFT_MENU_WIDTH = 130
+    

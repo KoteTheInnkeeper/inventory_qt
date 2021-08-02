@@ -42,9 +42,9 @@ class UIMainWindow(object):
         self.left_menu_layout.setSpacing(0)
 
         # Toggle, sell, stock buttons
-        self.toggle_btn = LeftMenuPushButton("Hide menu", icon_path="hamburger_icon.svg", btn_active_border_right=Color.BTN_ACTIVE_BORDER)
-        self.sell_btn = LeftMenuPushButton("Sell", icon_path="sell_icon.svg", is_active=True)
-        self.stock_btn = LeftMenuPushButton("Stock", icon_path="box_icon.svg")
+        self.toggle_btn = LeftMenuPushButton("Hide menu", icon_path="hamburger_icon.svg")
+        self.sell_btn = LeftMenuPushButton("Sell", icon_path="sell_icon.svg", is_active=True, btn_active_border_right=Color.CONTENT_BACKGROUND)
+        self.stock_btn = LeftMenuPushButton("Stock", icon_path="box_icon.svg", btn_active_border_right=Color.STOCK_LEFT_MENU)
         self.about_btn = LeftMenuPushButton("About", icon_path="about_icon.svg")
 
         # A spacer for the left menu

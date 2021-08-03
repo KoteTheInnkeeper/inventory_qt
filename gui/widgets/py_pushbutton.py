@@ -274,8 +274,8 @@ class FormButton(QPushButton):
         text: str="FormButton",
         height: int=Dimension.FORM_BUTTON_DEF_HEIGHT, 
         minimum_width: int=Dimension.FORM_BUTTON_DEF_WIDTH, 
-        text_padding: int=0, 
-        text_color: str=Color.BTN_TEXT,
+        text_padding: int=10, 
+        text_color: str=Color.FORM_BUTTON_TEXT,
         btn_color: str=Color.FORM_BUTTON_DEF_COLOR, 
         btn_hover: str=Color.FORM_BUTTON_DEF_HOVER,
         btn_pressed :str=Color.FORM_BUTTON_DEF_PRESSED,
@@ -295,6 +295,8 @@ class FormButton(QPushButton):
         self.btn_hover = btn_hover
         self.btn_pressed = btn_pressed
 
+        self.set_style()
+
     
     def set_style(self):
         """Sets the stylesheet by the given parameters."""
@@ -303,9 +305,11 @@ class FormButton(QPushButton):
             color: {self.text_color};
             background-color: {self.btn_color};
             padding-left: {self.text_padding}px;
-            text-align: left;
-            border: none;
-            font: 75 10pt 'Segoe UI';
+            padding-right: {self.text_padding}px;
+            text-align: center;
+            border: 1px solid {self.btn_color};
+            border-radius: {self.height() / 4 }px;
+            font: 100 10pt 'Segoe UI';
         }}
 
         QPushButton:hover {{

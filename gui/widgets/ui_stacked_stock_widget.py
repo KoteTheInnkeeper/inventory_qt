@@ -18,9 +18,12 @@ class UIStockStackedPages(object):
         self.add_buy_layout = QVBoxLayout(self.add_buy_page)
         self.add_buy_layout.setContentsMargins(5, 10, 5, 10)
         self.add_buy_layout.setSpacing(10)
+        self.add_buy_layout.setAlignment(Qt.AlignVCenter)
         # Making the elements that are going to fit within this layout
         # A frame to hold the 'products' widgets
         self.set_product_frame = QFrame()
+        self.set_product_frame.setMinimumHeight(20)
+        self.set_product_frame.setSizePolicy(QSizePolicy.Maximum, QSizePolicy.Maximum)
         # A layout for this frame
         self.set_product_layout = QHBoxLayout(self.set_product_frame)
         self.set_product_layout.setSpacing(10)
@@ -29,15 +32,16 @@ class UIStockStackedPages(object):
         # Elements for this frame
         # Label
         self.set_product_label = QLabel("Product name")
-        self.set_product_label.setStyleSheet("font: 12px 'Segoe UI';")
+        self.set_product_label.setStyleSheet("font: 100 15pt 'Segoe UI';")
         # Combobox for products that are already in database
         self.set_product_combobox = QComboBox()
         self.set_product_combobox.setMinimumSize(QSize(Dimension.COMBOBOX_MIN_WIDTH, Dimension.COMBOBOX_MIN_HEIGHT))
         # A line edit in case the product is a new one
-        self.new_product_linedit = FormLineEdit(visibility=True)
+        self.new_product_linedit = FormLineEdit(visibility=False)
         # A checkbox to tell if the product is a new one
         self.new_product_checkbox = QCheckBox()
         self.new_product_checkbox.setChecked(False)
+        self.new_product_checkbox.setText("New product")
         # Let's add these three elements to the layout
         self.set_product_layout.addWidget(self.set_product_label)
         self.set_product_layout.addWidget(self.set_product_combobox)
@@ -48,6 +52,7 @@ class UIStockStackedPages(object):
         self.buy_list_table = QTableWidget()
         self.buy_list_table.setMinimumWidth(724)
         self.buy_list_table.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.buy_list_table.setStyleSheet("background-color: white;")
 
         # A frame to hold the "add" and "clear list" buttons
         self.stock_btn_frame = QFrame()

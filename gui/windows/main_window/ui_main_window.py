@@ -19,7 +19,7 @@ class UIMainWindow(object):
         
         # Setting the initial geometry
         parent.resize(1024, 576)
-        parent.setMinimumSize(QSize(800, 450))
+        parent.setMinimumSize(QSize(1024, 576))
         parent.setMaximumSize(QSize(1920, 1080))
 
         # Main frame

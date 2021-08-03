@@ -1,6 +1,7 @@
 from qt_core import *
 from gui.gui_constants import *
 from gui.widgets.py_pushbutton import MinorLeftMenuButtons
+from gui.widgets.ui_stacked_stock_widget import UIStockStackedPages
 
 class UIStackedPages(object):
     def setupUi(self, StackedPages):
@@ -29,11 +30,7 @@ class UIStackedPages(object):
         self.stock_layout.setSpacing(0)
         self.stock_layout.setObjectName(u"stock_layout")
         self.stock_layout.setContentsMargins(0, 0, 0, 0)
-        self.stock_label = QLabel(self.stock_page)
-        self.stock_label.setObjectName(u"stock_label")
-        self.stock_label.setText(u"Stock label")
-        self.stock_label.setAlignment(Qt.AlignCenter)
-
+        
         self.stock_menu = QFrame()
         self.stock_menu.setStyleSheet(f"background-color: {Color.STOCK_LEFT_MENU};")
         self.stock_menu.setMaximumWidth(Dimension.STOCK_LEFT_MENU_WIDTH)
@@ -54,7 +51,19 @@ class UIStackedPages(object):
         self.stock_menu_layout.addWidget(self.show_stock_btn)
 
         self.stock_layout.addWidget(self.stock_menu)
-        self.stock_layout.addWidget(self.stock_label)
+        
+
+        # Adding the stock stacked pages to this page
+        self.stock_stacked_widget = QStackedWidget()
+        # SET THE STYLESHEET HERE #
+        # Set the pages
+        self.ui_stock_stacked_pages = UIStockStackedPages()
+        self.ui_stock_stacked_pages.setupUi(self.stock_stacked_widget)
+        self.stock_stacked_widget.setCurrentWidget(self.ui_stock_stacked_pages.add_buy_page)
+
+        self.stock_layout.addWidget(self.stock_stacked_widget)
+
+
 
         StackedPages.addWidget(self.stock_page)
         self.about_page = QWidget()

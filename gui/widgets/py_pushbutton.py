@@ -266,3 +266,54 @@ class MinorLeftMenuButtons(QPushButton):
         log.debug(f"Setting the {self.objectName()} from {self.is_active} to {active}.")
         self.is_active = active
         self.set_style()
+
+
+class FormButton(QPushButton):
+    def __init__(
+        self,
+        text: str="FormButton",
+        height: int=Dimension.FORM_BUTTON_DEF_HEIGHT, 
+        minimum_width: int=Dimension.FORM_BUTTON_DEF_WIDTH, 
+        text_padding: int=0, 
+        text_color: str=Color.BTN_TEXT,
+        btn_color: str=Color.FORM_BUTTON_DEF_COLOR, 
+        btn_hover: str=Color.FORM_BUTTON_DEF_HOVER,
+        btn_pressed :str=Color.FORM_BUTTON_DEF_PRESSED,
+    ):
+        super().__init__()
+
+        self.setText(text)
+        self.setMaximumHeight(height)
+        self.setMinimumHeight(height)
+        self.setCursor(Qt.PointingHandCursor)
+
+        # Taking the other needed parameters
+        self.minimum_width = minimum_width
+        self.text_padding = text_padding
+        self.text_color = text_color
+        self.btn_color = btn_color
+        self.btn_hover = btn_hover
+        self.btn_pressed = btn_pressed
+
+    
+    def set_style(self):
+        """Sets the stylesheet by the given parameters."""
+        stylesheet_str = f"""
+        QPushButton {{
+            color: {self.text_color};
+            background-color: {self.btn_color};
+            padding-left: {self.text_padding}px;
+            text-align: left;
+            border: none;
+            font: 75 10pt 'Segoe UI';
+        }}
+
+        QPushButton:hover {{
+            background-color: {self.btn_hover};
+        }}
+        
+        QPushButton:pressed {{
+            background-color: {self.btn_pressed};
+        }}
+        """
+        self.setStyleSheet(stylesheet_str)

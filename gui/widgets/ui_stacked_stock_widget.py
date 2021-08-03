@@ -1,8 +1,15 @@
+import logging
+log = logging.getLogger("inventory_qt.ui_stacked_stock_widget")
+
+from PySide6 import QtWidgets
+import PySide6
 from qt_core import *
 from gui.gui_constants import *
 from gui.widgets.py_pushbutton import *
 from gui.widgets.py_lineedit import FormLineEdit
 
+TABLE_COLUMNS = ("Id", "Product name", "Date", "Cost", "Price")
+TABLE_SIZE_FORMAT = (QHeaderView.ResizeToContents, QHeaderView.Stretch, QHeaderView.ResizeToContents, QHeaderView.ResizeToContents, QHeaderView.ResizeToContents)
 
 class UIStockStackedPages(object):
     def setupUi(self, StockStackedPages: QStackedWidget):
@@ -16,7 +23,7 @@ class UIStockStackedPages(object):
         self.add_buy_page.setObjectName(u"add_buy_page")
         # Setting up a layout for add buy page
         self.add_buy_layout = QVBoxLayout(self.add_buy_page)
-        self.add_buy_layout.setContentsMargins(5, 10, 5, 10)
+        self.add_buy_layout.setContentsMargins(10, 10, 10, 10)
         self.add_buy_layout.setSpacing(10)
         self.add_buy_layout.setAlignment(Qt.AlignVCenter)
         # Making the elements that are going to fit within this layout
@@ -32,7 +39,7 @@ class UIStockStackedPages(object):
         # Elements for this frame
         # Label
         self.set_product_label = QLabel("Product name")
-        self.set_product_label.setStyleSheet("font: 100 15pt 'Segoe UI';")
+        self.set_product_label.setStyleSheet("font: 100 13pt 'Segoe UI';")
         # Combobox for products that are already in database
         self.set_product_combobox = QComboBox()
         self.set_product_combobox.setMinimumSize(QSize(Dimension.COMBOBOX_MIN_WIDTH, Dimension.COMBOBOX_MIN_HEIGHT))
@@ -53,6 +60,31 @@ class UIStockStackedPages(object):
         self.buy_list_table.setMinimumWidth(724)
         self.buy_list_table.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.buy_list_table.setStyleSheet("background-color: white;")
+        # Setting the columns
+        column_font = QFont()
+        column_font.setFamily('Segoe UI')
+        column_font.setPointSize(12)
+        column_font.setBold(True)
+        column_font.setWeight(QFont.Weight.Bold)
+        if self.buy_list_table.columnCount() < len(TABLE_COLUMNS):
+            self.buy_list_table.setColumnCount(len(TABLE_COLUMNS))
+        for i, column in enumerate(TABLE_COLUMNS, 0):
+            item = QTableWidgetItem()
+            item.setText(column)
+            item.setTextAlignment(Qt.AlignCenter)
+            item.setFont(column_font)
+            log.debug(f"Setting item index {i} named {column}.")
+            self.buy_list_table.setHorizontalHeaderItem(i, item)
+        self.buy_list_table.horizontalHeader().setDefaultSectionSize(150)
+        self.buy_list_table.horizontalHeader().setMinimumSectionSize(150)
+        # Formatting the size for each header
+        for i, size in enumerate(TABLE_SIZE_FORMAT, 0):
+            self.buy_list_table.horizontalHeader().setSectionResizeMode(i,size)
+        # Showing horizontal header and hiding vertical
+        self.buy_list_table.horizontalHeader().setVisible(True)
+        self.buy_list_table.verticalHeader().setVisible(False)
+    
+        
 
         # A frame to hold the "add" and "clear list" buttons
         self.stock_btn_frame = QFrame()

@@ -45,12 +45,27 @@ class MainWindow(QMainWindow):
         self.ui.ui_pages.add_buy_btn.clicked.connect(self.show_add_stock)
         self.ui.ui_pages.show_stock_btn.clicked.connect(self.show_stock_list)
 
+        # Signal for the checkbox
+        self.ui.ui_pages.ui_stock_stacked_pages.new_product_checkbox.toggled.connect(self.toggled_new_product_checkbox)
+
+
 
         # Showing the sell page first
         self.show_sell()
 
         # Showing
         self.show()
+
+    def toggled_new_product_checkbox(self, state: bool):
+        """To act upon the checkbox being toggled."""
+        if state:
+            self.ui.ui_pages.ui_stock_stacked_pages.new_product_linedit.setVisible(True)
+            self.ui.ui_pages.ui_stock_stacked_pages.set_product_combobox.setVisible(False)
+        else:
+            self.ui.ui_pages.ui_stock_stacked_pages.new_product_linedit.setVisible(False)
+            self.ui.ui_pages.ui_stock_stacked_pages.set_product_combobox.setVisible(True)
+
+        pass
 
     def clear_btns(self, frame: QFrame):
         """Sets all button's 'is_active' parameter to False."""

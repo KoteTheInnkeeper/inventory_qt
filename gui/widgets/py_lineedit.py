@@ -13,6 +13,8 @@ class FormLineEdit(QLineEdit):
 
         self.width, self.height = width, height
         self.is_visible = visibility
+        self.setMinimumHeight(height)
+        self.setMinimumWidth(width)
 
         self.setVisible(self.is_visible)
 

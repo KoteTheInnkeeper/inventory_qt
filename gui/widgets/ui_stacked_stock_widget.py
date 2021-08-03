@@ -1,6 +1,3 @@
-import logging
-log = logging.getLogger("inventory_qt.ui_stacked_stock_widget")
-
 from PySide6 import QtWidgets
 import PySide6
 from qt_core import *
@@ -73,19 +70,16 @@ class UIStockStackedPages(object):
             item.setText(column)
             item.setTextAlignment(Qt.AlignCenter)
             item.setFont(column_font)
-            log.debug(f"Setting item index {i} named {column}.")
             self.buy_list_table.setHorizontalHeaderItem(i, item)
         self.buy_list_table.horizontalHeader().setDefaultSectionSize(150)
         self.buy_list_table.horizontalHeader().setMinimumSectionSize(150)
         # Formatting the size for each header
         for i, size in enumerate(TABLE_SIZE_FORMAT, 0):
-            self.buy_list_table.horizontalHeader().setSectionResizeMode(i,size)
+            self.buy_list_table.horizontalHeader().setSectionResizeMode(i, size)
         # Showing horizontal header and hiding vertical
         self.buy_list_table.horizontalHeader().setVisible(True)
         self.buy_list_table.verticalHeader().setVisible(False)
     
-        
-
         # A frame to hold the "add" and "clear list" buttons
         self.stock_btn_frame = QFrame()
         # Setting a layout
@@ -112,11 +106,3 @@ class UIStockStackedPages(object):
 
 
         QMetaObject.connectSlotsByName(StockStackedPages)
-
-
-
-
-
-
-        
-

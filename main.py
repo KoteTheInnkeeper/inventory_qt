@@ -78,7 +78,6 @@ class MainWindow(QMainWindow):
     
     def show_menu(self):
         """An animation to show the left menu."""
-        # Get the current left menu's width.
         menu_width = self.ui.left_menu.width()
 
         width = Dimension.LEFT_MENU_WIDTH

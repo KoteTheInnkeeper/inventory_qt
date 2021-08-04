@@ -55,7 +55,7 @@ class UIStackedPages(object):
 
         # Adding the stock stacked pages to this page
         self.stock_stacked_widget = QStackedWidget()
-        # SET THE STYLESHEET HERE #
+        # STYLEESHEET REQUIRED? #
         # Set the pages
         self.ui_stock_stacked_pages = UIStockStackedPages()
         self.ui_stock_stacked_pages.setupUi(self.stock_stacked_widget)

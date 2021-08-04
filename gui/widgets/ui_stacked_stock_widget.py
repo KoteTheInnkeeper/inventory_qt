@@ -200,9 +200,7 @@ class UIStockStackedPages(object):
         self.stock_list_layout.addWidget(self.select_product)
         self.stock_list_layout.addWidget(self.show_stock_list_table)
 
-
-        
-
+        # Adding both pages to the stacked stock pages.
         StockStackedPages.addWidget(self.add_buy_page)
         StockStackedPages.addWidget(self.stock_list)
 

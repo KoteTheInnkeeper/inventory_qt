@@ -10,7 +10,9 @@ class FormCombobox(QComboBox):
         bg_color: str = Color.COMBOBOX_DEF_COLOR,
         bg_hover: str = Color.COMBOBOX_DEF_HOVER_COLOR,
         select_bg_color: str = Color.COMBOBOX_DEF_SELECT_BG_COLOR,
-        select_text_color: str = Color.COMBOBOX_DEF_SELECT_TEXT_COLOR
+        select_text_color: str = Color.COMBOBOX_DEF_SELECT_TEXT_COLOR,
+        visible: bool = False,
+        enabled: bool = False,
     ):
         super().__init__()
 
@@ -22,12 +24,14 @@ class FormCombobox(QComboBox):
         self.select_bg_color = select_bg_color
         self.select_text_color = select_text_color
 
+        # Setting to disable by default
+        self.setEnabled(enabled)
+        self.setVisible(visible)
+
         # Setting the style
         self.set_style()
 
-        # Setting to disable by default
-        self.setEnabled(False)
-        self.setVisible(False)
+        
 
     def set_style(self):
         """Set's a stylesheet"""

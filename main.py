@@ -118,11 +118,13 @@ class MainWindow(QMainWindow):
         """"Displays the add stock page."""
         self.clear_btns(self.ui.ui_pages.stock_menu)
         self.ui.ui_pages.add_buy_btn.set_active(True)
+        self.ui.ui_pages.stock_stacked_widget.setCurrentWidget(self.ui.ui_pages.ui_stock_stacked_pages.add_buy_page)
     
     def show_stock_list(self):
         """"Displays the add stock page."""
         self.clear_btns(self.ui.ui_pages.stock_menu)
         self.ui.ui_pages.show_stock_btn.set_active(True)
+        self.ui.ui_pages.stock_stacked_widget.setCurrentWidget(self.ui.ui_pages.ui_stock_stacked_pages.stock_list)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

@@ -43,7 +43,7 @@ class UIStackedPages(object):
         self.stock_menu_layout.setAlignment(Qt.AlignTop)
 
         # Stock left menu buttons
-        self.add_buy_btn = MinorLeftMenuButtons("Add buy", icon_path="stock_add_icon.svg", btn_active_border_right=Color.CONTENT_BACKGROUND)
+        self.add_buy_btn = MinorLeftMenuButtons("Add buy", icon_path="stock_add_icon.svg", btn_active_border_right=Color.CONTENT_BACKGROUND, is_active=True)
         self.show_stock_btn = MinorLeftMenuButtons("Show stock", icon_path="stock_list_icon.svg", btn_active_border_right=Color.CONTENT_BACKGROUND)
 
         # Adding this stock left buttons to the left menu from stock

@@ -4,6 +4,7 @@ from qt_core import *
 from gui.gui_constants import *
 from gui.widgets.py_pushbutton import *
 from gui.widgets.py_lineedit import FormLineEdit
+from gui.widgets.py_combobox import FormCombobox
 
 TABLE_COLUMNS = ("Id", "Product name", "Date", "Cost", "Price")
 TABLE_SIZE_FORMAT = (QHeaderView.ResizeToContents, QHeaderView.Stretch, QHeaderView.ResizeToContents, QHeaderView.ResizeToContents, QHeaderView.ResizeToContents)
@@ -38,13 +39,14 @@ class UIStockStackedPages(object):
         self.set_product_label = QLabel("Product name")
         self.set_product_label.setStyleSheet("font: 100 13pt 'Segoe UI';")
         # Combobox for products that are already in database
-        self.set_product_combobox = QComboBox()
+        self.set_product_combobox = FormCombobox()
+        self.set_product_combobox.addItems(["nooo", "dat"])
         self.set_product_combobox.setMinimumSize(QSize(Dimension.COMBOBOX_MIN_WIDTH, Dimension.COMBOBOX_MIN_HEIGHT))
         # A line edit in case the product is a new one
-        self.new_product_linedit = FormLineEdit(visibility=False)
+        self.new_product_linedit = FormLineEdit(visibility=True)
         # A checkbox to tell if the product is a new one
         self.new_product_checkbox = QCheckBox()
-        self.new_product_checkbox.setChecked(False)
+        self.new_product_checkbox.setChecked(True)
         self.new_product_checkbox.setText("New product")
         # Let's add these three elements to the layout
         self.set_product_layout.addWidget(self.set_product_label)

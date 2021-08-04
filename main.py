@@ -48,8 +48,7 @@ class MainWindow(QMainWindow):
         # Signal for the checkbox
         self.ui.ui_pages.ui_stock_stacked_pages.new_product_checkbox.toggled.connect(self.toggled_new_product_checkbox)
 
-
-
+    
         # Showing the sell page first
         self.show_sell()
 

@@ -1,4 +1,4 @@
-from PySide6 import QtWidgets
+from PySide6 import QtGui, QtWidgets
 import PySide6
 from qt_core import *
 from gui.gui_constants import *
@@ -40,19 +40,55 @@ class UIStockStackedPages(object):
         self.set_product_label.setStyleSheet("font: 100 13pt 'Segoe UI';")
         # Combobox for products that are already in database
         self.set_product_combobox = FormCombobox()
-        self.set_product_combobox.addItems(["nooo", "dat"])
         self.set_product_combobox.setMinimumSize(QSize(Dimension.COMBOBOX_MIN_WIDTH, Dimension.COMBOBOX_MIN_HEIGHT))
         # A line edit in case the product is a new one
         self.new_product_linedit = FormLineEdit(visibility=True)
         # A checkbox to tell if the product is a new one
         self.new_product_checkbox = QCheckBox()
         self.new_product_checkbox.setChecked(True)
-        self.new_product_checkbox.setText("New product")
+        self.new_product_checkbox.setText("New")
+
+        # A cost label
+        self.cost_label = QLabel("Cost")
+        self.cost_label.setStyleSheet("font: 100 13pt 'Segoe UI';")
+        # A cost line_edit
+        self.cost_lineedit = FormLineEdit(visibility=True, width=75, text_alignment = "right")
+        validator = QRegularExpressionValidator(QRegularExpression("[0-9]+.{1}[0-9]{3}"))
+        self.cost_lineedit.setValidator(validator)
+        # Cash label
+        self.cash_label = QLabel("$")
+        self.cash_label.setStyleSheet("font: 100 13pt 'Segoe UI';")
+        self.cash_label.setAlignment(Qt.AlignLeft)
+
+        # A price label
+        self.price_label = QLabel("Price")
+        self.price_label.setStyleSheet("font: 100 13pt 'Segoe UI';")
+        # A price line_edit
+        self.price_lineedit = FormLineEdit(visibility=True, width=75, text_alignment = "right")
+        self.price_lineedit.setValidator(validator)
+        # Cash label
+        self.cash_label_2 = QLabel("$")
+        self.cash_label_2.setStyleSheet("font: 100 13pt 'Segoe UI';")
+        self.cash_label_2.setAlignment(Qt.AlignLeft)
+
+        # Spacer
+        self.btn_spacer_2 = QSpacerItem(10000, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        # A button to add this product
+        self.add_product_btn = FormButton("+", height=25)
+
         # Let's add these three elements to the layout
         self.set_product_layout.addWidget(self.set_product_label)
         self.set_product_layout.addWidget(self.set_product_combobox)
         self.set_product_layout.addWidget(self.new_product_linedit)
         self.set_product_layout.addWidget(self.new_product_checkbox)
+        self.set_product_layout.addWidget(self.cost_label)
+        self.set_product_layout.addWidget(self.cost_lineedit)
+        self.set_product_layout.addWidget(self.cash_label)
+        self.set_product_layout.addWidget(self.price_label)
+        self.set_product_layout.addWidget(self.price_lineedit)
+        self.set_product_layout.addWidget(self.cash_label_2)
+        self.set_product_layout.addItem(self.btn_spacer_2)
+        self.set_product_layout.addWidget(self.add_product_btn)
 
         # A table for us to show what's currently being added as a buy
         self.buy_list_table = QTableWidget()

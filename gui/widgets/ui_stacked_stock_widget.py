@@ -8,8 +8,8 @@ from gui.widgets.py_combobox import FormCombobox
 
 ADD_TABLE_COLUMS = ("Id", "Product name", "Date", "Cost", "Price")
 ADD_TABLE_SIZE_FORMAT = (QHeaderView.ResizeToContents, QHeaderView.Stretch, QHeaderView.ResizeToContents, QHeaderView.ResizeToContents, QHeaderView.ResizeToContents)
-SHOW_TABLE_COLUMS = ("Id", "Product name", "Last buy", "Cost", "Price")
-SHOW_TABLE_SIZE_FORMAT = (QHeaderView.ResizeToContents, QHeaderView.Stretch, QHeaderView.ResizeToContents,QHeaderView.ResizeToContents, QHeaderView.ResizeToContents)
+SHOW_TABLE_COLUMS = ("Id", "Product name", "Last buy", "Cost", "Price", "In storage")
+SHOW_TABLE_SIZE_FORMAT = (QHeaderView.ResizeToContents, QHeaderView.Stretch, QHeaderView.ResizeToContents,QHeaderView.ResizeToContents, QHeaderView.ResizeToContents, QHeaderView.ResizeToContents)
 
 class UIStockStackedPages(object):
     def setupUi(self, StockStackedPages: QStackedWidget):

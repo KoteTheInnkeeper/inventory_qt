@@ -48,6 +48,9 @@ class MainWindow(QMainWindow):
         # Signal for the checkbox
         self.ui.ui_pages.ui_stock_stacked_pages.new_product_checkbox.toggled.connect(self.toggled_new_product_checkbox)
 
+        # Signal for the add product button
+        self.ui.ui_pages.ui_stock_stacked_pages.add_product_btn.clicked.connect(self.add_product_to_list)
+
     
         # Showing the sell page first
         self.show_sell()
@@ -124,6 +127,16 @@ class MainWindow(QMainWindow):
         self.clear_btns(self.ui.ui_pages.stock_menu)
         self.ui.ui_pages.show_stock_btn.set_active(True)
         self.ui.ui_pages.stock_stacked_widget.setCurrentWidget(self.ui.ui_pages.ui_stock_stacked_pages.stock_list)
+
+    def add_product_to_list(self):
+        """Adds the product to the list."""
+        log.info("An addition of a product to the buy list was issued.")
+        if self.ui.ui_pages.ui_stock_stacked_pages.new_product_checkbox.isChecked():
+            name = self.ui.ui_pages.ui_stock_stacked_pages.new_product_linedit.text().strip().upper()
+        else:
+            name = self.ui.ui_pages.ui_stock_stacked_pages.set_product_combobox.currentText().strip().upper()
+        pass
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

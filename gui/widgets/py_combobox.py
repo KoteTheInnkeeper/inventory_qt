@@ -35,7 +35,7 @@ class FormCombobox(QComboBox):
 
     def set_style(self):
         """Set's a stylesheet"""
-        sylesheet_str = f"""
+        stylesheet_str = f"""
         QComboBox {{
             background-color: {self.bg_color};
             selection-background-color: {self.select_bg_color};
@@ -46,4 +46,12 @@ class FormCombobox(QComboBox):
           background-color: {self.bg_hover};  
         }}"""
 
-        self.setStyleSheet(sylesheet_str)
+        disabled_str = f"""
+        QComboBox {{
+            background-color: {Color.CONTENT_BACKGROUND}
+        }}
+        """
+        if self.isEnabled():
+            self.setStyleSheet(stylesheet_str)
+        else:
+            self.setStyleSheet(stylesheet_str + disabled_str)

@@ -40,7 +40,7 @@ class UIStockStackedPages(object):
         self.set_product_label = QLabel("Product")
         self.set_product_label.setStyleSheet("font: 100 13pt 'Segoe UI';")
         # Combobox for products that are already in database
-        self.set_product_combobox = FormCombobox()
+        self.set_product_combobox = FormCombobox(enabled=False)
         # A line edit in case the product is a new one
         self.new_product_linedit = FormLineEdit(visibility=True)
         # A checkbox to tell if the product is a new one
@@ -162,7 +162,7 @@ class UIStockStackedPages(object):
         self.select_product_label = QLabel("Product")
         self.select_product_label.setStyleSheet("font: 100 13pt 'Segoe UI';")
         # Combobox for products that are already in database
-        self.select_product_combobox = FormCombobox(visible=True)
+        self.select_product_combobox = FormCombobox(visible=True, enabled=False)
         self.select_product_combobox.setEditable(True)
         # Adding this to the layout
         self.select_product_layout.addWidget(self.select_product_label)

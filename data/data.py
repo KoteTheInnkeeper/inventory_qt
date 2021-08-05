@@ -2,6 +2,7 @@ import logging
 import os
 import sqlite3
 
+from typing import List
 from data.database_cursor import DBCursor
 from obj.objects import *
 from utils.errors import *
@@ -79,3 +80,22 @@ class Database:
             raise
         else:
             log.info(f"{product.__repr__} was updated successfully.")
+    
+    def get_product_names(self) -> List[str]:
+        try:
+            with DBCursor(self.host) as cursor:
+                cursor.execute("SELECT name FROM items")
+                results = cursor.fetchall()
+                if results:
+                    return [product_name for (product_name, ) in results]
+                else:
+                    raise ProductsNotFound("There were no products to be displayed.")
+        except Exception:
+            log.critical("An exception was raised.")
+            raise
+        except ProductsNotFound:
+            log.critical("No products were found. Returning an empty list.")
+            return []
+    
+    
+        

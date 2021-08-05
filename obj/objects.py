@@ -46,3 +46,4 @@ class StoredProduct(Product):
             'price': self.price
         }
     
+    

@@ -1,7 +1,10 @@
-from data.database_cursor import DBCursor
-import sqlite3
 import logging
 import os
+import sqlite3
+
+from data.database_cursor import DBCursor
+from obj.objects import *
+from utils.errors import *
 
 log = logging.getLogger("inventory_qt.data")
 
@@ -52,5 +55,27 @@ class Database:
         path = os.path.join(app_path, folder)
         return os.path.normpath(os.path.join(path, host))
 
-
-
+    def add_product(self, product: Product):
+        """Adds a new product."""
+        log.debug("Adding a new product")
+        product_parameters = product.to_db()
+        try:
+            with DBCursor(self.host) as cursor:
+                cursor.execute("INSERT INTO items VALUES (?, ?, ?)", (product_parameters['name'], product_parameters['cost'], product_parameters['price']))
+        except sqlite3.IntegrityError:
+            log.critical("An integrity error was raised. Maybe a matching name or id.")
+            raise DatabaseIntegrityError("There's a matching name or id already stored.")
+        else:
+            log.info(f"{product.__repr__} was added successfully.")
+    
+    def update_product(self, product: StoredProduct):
+        prod_param = product.to_db()
+        log.debug("Updating a product.")
+        try:
+            with DBCursor(self.host) as cursor:
+                cursor.execute("UPDATE items SET name = ?, cost_price = ?, sell_price = ? WHERE rowid = ?", (prod_param['name'], prod_param['cost'], prod_param['price'], prod_param['id']))
+        except Exception:
+            log.critical("An exception was raised.")
+            raise
+        else:
+            log.info(f"{product.__repr__} was updated successfully.")

@@ -1,9 +1,9 @@
 import logging
 import os
-import sqlite3
 
-from typing import List
-from data.database_cursor import DBCursor
+
+from typing import List, Union
+from data.database_cursor import *
 from obj.objects import *
 from utils.errors import *
 
@@ -90,12 +90,30 @@ class Database:
                     return [product_name for (product_name, ) in results]
                 else:
                     raise ProductsNotFound("There were no products to be displayed.")
-        except Exception:
-            log.critical("An exception was raised.")
-            raise
         except ProductsNotFound:
             log.critical("No products were found. Returning an empty list.")
             return []
+        except Exception:
+            log.critical("An exception was raised.")
+            raise
+        
+    def get_product_id(self, name: str) -> Union[str, int]:
+        log.info("Getting a product's id by its name.")
+        try:
+            with DBCursor as cursor:
+                cursor.execute("SELECT rowid FROM items WHERE name = ?", (name.lower(),))
+                result = cursor.fetchone()
+                if result:
+                    log.debug("Product found. Returning the id.")
+                    return result[0]
+                else:
+                    log.error("There's no match for this name. Returning NEW")
+                    return "NEW"
+                    
+        except Exception:
+            log.critical("An exception was raised.")
+            raise
+        
     
     
         

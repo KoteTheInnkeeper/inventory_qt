@@ -14,3 +14,6 @@ class ProductsNotFound(Exception):
     def __init__(self, message: str) -> None:
         super().__init__(message)
         
+class ProductNotFound(Exception):
+    def __init__(self, message: str) -> None:
+        super().__init__(message)

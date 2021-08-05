@@ -6,8 +6,8 @@ from gui.widgets.py_pushbutton import *
 from gui.widgets.py_lineedit import FormLineEdit
 from gui.widgets.py_combobox import FormCombobox
 
-ADD_TABLE_COLUMS = ("Id", "Product name", "Date", "Cost", "Price")
-ADD_TABLE_SIZE_FORMAT = (QHeaderView.ResizeToContents, QHeaderView.Stretch, QHeaderView.ResizeToContents, QHeaderView.ResizeToContents, QHeaderView.ResizeToContents)
+ADD_TABLE_COLUMS = ("Id", "Product name", "Units","Cost", "Price")
+ADD_TABLE_SIZE_FORMAT = (QHeaderView.ResizeToContents, QHeaderView.Stretch, QHeaderView.ResizeToContents,QHeaderView.ResizeToContents, QHeaderView.ResizeToContents)
 SHOW_TABLE_COLUMS = ("Id", "Product name", "Last buy", "Cost", "Price", "In storage")
 SHOW_TABLE_SIZE_FORMAT = (QHeaderView.ResizeToContents, QHeaderView.Stretch, QHeaderView.ResizeToContents,QHeaderView.ResizeToContents, QHeaderView.ResizeToContents, QHeaderView.ResizeToContents)
 
@@ -71,6 +71,14 @@ class UIStockStackedPages(object):
         self.cash_label_2.setStyleSheet("font: 100 13pt 'Segoe UI';")
         self.cash_label_2.setAlignment(Qt.AlignLeft)
 
+        # Units label
+        self.units_label = QLabel("Units")
+        self.units_label.setStyleSheet("font: 100 13pt 'SEgoe UI';")
+        # Units lineedit
+        self.units_lineedit = FormLineEdit(visibility=True, width=50, text_alignment="right")
+        validator = QRegularExpressionValidator(QRegularExpression("[0-9]+"))
+        self.units_lineedit.setValidator(validator)        
+
         # Spacer
         self.btn_spacer_2 = QSpacerItem(100000, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
         # A button to add this product
@@ -87,6 +95,8 @@ class UIStockStackedPages(object):
         self.set_product_layout.addWidget(self.price_label)
         self.set_product_layout.addWidget(self.price_lineedit)
         self.set_product_layout.addWidget(self.cash_label_2)
+        self.set_product_layout.addWidget(self.units_label)
+        self.set_product_layout.addWidget(self.units_lineedit)
         self.set_product_layout.addItem(self.btn_spacer_2)
         self.set_product_layout.addWidget(self.add_product_btn)
 
@@ -109,8 +119,8 @@ class UIStockStackedPages(object):
             item.setTextAlignment(Qt.AlignCenter)
             item.setFont(column_font)
             self.buy_list_table.setHorizontalHeaderItem(i, item)
-        self.buy_list_table.horizontalHeader().setDefaultSectionSize(150)
-        self.buy_list_table.horizontalHeader().setMinimumSectionSize(150)
+        self.buy_list_table.horizontalHeader().setDefaultSectionSize(100)
+        self.buy_list_table.horizontalHeader().setMinimumSectionSize(80)
         # Formatting the size for each header
         for i, size in enumerate(ADD_TABLE_SIZE_FORMAT, 0):
             self.buy_list_table.horizontalHeader().setSectionResizeMode(i, size)
@@ -187,8 +197,8 @@ class UIStockStackedPages(object):
             item.setTextAlignment(Qt.AlignCenter)
             item.setFont(column_font)
             self.show_stock_list_table.setHorizontalHeaderItem(i, item)
-        self.show_stock_list_table.horizontalHeader().setDefaultSectionSize(150)
-        self.show_stock_list_table.horizontalHeader().setMinimumSectionSize(150)
+        self.show_stock_list_table.horizontalHeader().setDefaultSectionSize(100)
+        self.show_stock_list_table.horizontalHeader().setMinimumSectionSize(80)
         # Formatting the size for each header
         for i, size in enumerate(SHOW_TABLE_SIZE_FORMAT, 0):
             self.show_stock_list_table.horizontalHeader().setSectionResizeMode(i, size)

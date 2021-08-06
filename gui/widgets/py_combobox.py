@@ -13,6 +13,7 @@ class FormCombobox(QComboBox):
         select_text_color: str = Color.COMBOBOX_DEF_SELECT_TEXT_COLOR,
         visible: bool = False,
         enabled: bool = False,
+        editable: bool = False
     ):
         super().__init__()
 
@@ -24,9 +25,12 @@ class FormCombobox(QComboBox):
         self.select_bg_color = select_bg_color
         self.select_text_color = select_text_color
 
-        # Setting to disable by default
+        # Setting the enabled an visible parameters
         self.setEnabled(enabled)
         self.setVisible(visible)
+        # Set the editable
+        self.setEditable(editable)
+
 
         # Setting the style
         self.set_style()

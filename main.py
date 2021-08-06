@@ -1,28 +1,27 @@
-from obj.objects import Product, StoredProduct
-import sys
 import logging
-logging.basicConfig(format="%(asctime)s %(levelname)-8s [%(filename)s:%(lineno)d] func:%(funcName)s - %(message)s", level=logging.DEBUG,
-                    filename='log.log')
 # Erasing previous log
 with open('log.log', 'w'):
     pass
+
+
+logging.basicConfig(format="%(asctime)s %(levelname)-8s [%(filename)s:%(lineno)d] func:%(funcName)s - %(message)s", level=logging.DEBUG,
+                    filename='log.log')
+
+from gui.widgets.py_lineedit import FormLineEdit
+
+
 # Getting a logger for this file.
 log = logging.getLogger("inventory_project")
 
+from gui.widgets.py_combobox import FormCombobox
+from obj.objects import Product, StoredProduct
+import sys
+
+
 from qt_core import *
 from utils.errors import *
-from typing import List
+from typing import List, Union
 
-# Erasing previous log
-with open('log.log', 'w'):
-    pass
-
-
-# Setting logger.
-logging.basicConfig(format="%(asctime)s %(levelname)-8s [%(filename)s:%(funcName)s:%(lineno)d] %(message)s", level=logging.DEBUG,
-                    filename='log.log')
-
-log = logging.getLogger("inventory_qt")
 
 from qt_core import *
 from gui.windows.main_window.ui_main_window import UIMainWindow
@@ -46,6 +45,17 @@ class MainWindow(QMainWindow):
         # Setting up the main window
         self.ui = UIMainWindow()
         self.ui.setup_ui(self)
+
+        # Populating product comboboxes properly
+        UICode.update_comboboxes(self.ui.ui_pages.ui_stock_stacked_pages.add_buy_page, db.get_product_names())
+        UICode.update_comboboxes(self.ui.ui_pages.ui_stock_stacked_pages.stock_list_page, db.get_product_names())
+
+        # Choosing what to show first at add_product
+        UICode.lineedit_or_combobox(
+            self.ui.ui_pages.ui_stock_stacked_pages.new_product_linedit,
+            self.ui.ui_pages.ui_stock_stacked_pages.set_product_combobox,
+            self.ui.ui_pages.ui_stock_stacked_pages.new_product_checkbox
+        )
         
         # Toggle menu button
         self.ui.toggle_btn.clicked.connect(self.show_menu)
@@ -57,9 +67,9 @@ class MainWindow(QMainWindow):
 
         # Signals for each minor button
         self.ui.ui_pages.add_buy_btn.clicked.connect(self.show_add_stock)
-        self.ui.ui_pages.show_stock_btn.clicked.connect(self.show_stock_list)
+        self.ui.ui_pages.show_stock_btn.clicked.connect(self.show_stock_list_page)
 
-        # Signal for the checkbox
+        # Signal for the checkbox to add a new product
         self.ui.ui_pages.ui_stock_stacked_pages.new_product_checkbox.toggled.connect(self.toggled_new_product_checkbox)
 
         # Signal for the add product button
@@ -68,6 +78,10 @@ class MainWindow(QMainWindow):
         self.ui.ui_pages.ui_stock_stacked_pages.clear_stock_btn.clicked.connect(self.clear_buy_list)
         # Signal for add to stock
         self.ui.ui_pages.ui_stock_stacked_pages.add_stock_btn.clicked.connect(self.add_products_to_stock)
+
+
+        # Signal for the checkbox to show all products
+        self.ui.ui_pages.ui_stock_stacked_pages.show_all_products_checkbox.toggled.connect(self.toggled_show_all_products_checkbox)
 
     
         # Showing the sell page first
@@ -84,8 +98,6 @@ class MainWindow(QMainWindow):
         else:
             self.ui.ui_pages.ui_stock_stacked_pages.new_product_linedit.setVisible(False)
             self.ui.ui_pages.ui_stock_stacked_pages.set_product_combobox.setVisible(True)
-
-        pass
 
     def clear_btns(self, frame: QFrame):
         """Sets all button's 'is_active' parameter to False."""
@@ -107,7 +119,6 @@ class MainWindow(QMainWindow):
                 log.critical("An exception was raised.")
                 raise
         
-
     def show_menu(self):
         """An animation to show the left menu."""
         menu_width = self.ui.left_menu.width()
@@ -151,11 +162,11 @@ class MainWindow(QMainWindow):
         self.ui.ui_pages.add_buy_btn.set_active(True)
         self.ui.ui_pages.stock_stacked_widget.setCurrentWidget(self.ui.ui_pages.ui_stock_stacked_pages.add_buy_page)
     
-    def show_stock_list(self):
+    def show_stock_list_page(self):
         """"Displays the add stock page."""
         self.clear_btns(self.ui.ui_pages.stock_menu)
         self.ui.ui_pages.show_stock_btn.set_active(True)
-        self.ui.ui_pages.stock_stacked_widget.setCurrentWidget(self.ui.ui_pages.ui_stock_stacked_pages.stock_list)
+        self.ui.ui_pages.stock_stacked_widget.setCurrentWidget(self.ui.ui_pages.ui_stock_stacked_pages.stock_list_page)
 
     def add_product_to_list(self):
         """Adds the product to the list."""
@@ -199,8 +210,6 @@ class MainWindow(QMainWindow):
         
         self.clear_fields(self.ui.ui_pages.ui_stock_stacked_pages.set_product_frame)
 
-    
-    
     def clear_buy_list(self):
         """Clears the table where we show what's currently being added to the list."""
         log.debug("A clearing of the buy list table was issued.")
@@ -235,6 +244,11 @@ class MainWindow(QMainWindow):
         finally:
             log.debug("Clearing the table")
             self.clear_buy_list()
+
+    def toggled_show_all_products_checkbox(self, state: bool):
+        """If it's checked, then it shows all products. Otherwise, it just shows the one selected."""
+        log.debug("The 'show all products' checkbox was toggled.")
+        pass
  
 
 class UICode:
@@ -263,8 +277,29 @@ class UICode:
         table.clearContents()
         table.setRowCount(0)
 
+    @classmethod
+    def update_comboboxes(self, frame: Union[QFrame, QWidget], list: List):
+        """Updates all comboboxes in the given frame."""
+        # Products ones
+        if list:
+            for combobox in frame.findChildren(QComboBox):
+                combobox.addItems(list)
+            combobox.setEnabled(True)
+            combobox.set_style()
+
+    @classmethod
+    def lineedit_or_combobox(cls, line_edit: FormLineEdit, combobox: FormCombobox, checkbox: QCheckBox):
+        """If the combobox has items at all, it shows it and disables the lineedit. It uncheks the checkbox."""
+        log.debug("Choosing between the combobox or lineedit for the product name.")
+        if combobox.isEnabled():
+            checkbox.setChecked(False)
+            combobox.setVisible(True)
+            line_edit.setVisible(False)
 
         
+        
+
+
         
     
 

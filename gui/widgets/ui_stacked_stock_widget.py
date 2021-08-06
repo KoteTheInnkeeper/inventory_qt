@@ -40,7 +40,7 @@ class UIStockStackedPages(object):
         self.set_product_label = QLabel("Product")
         self.set_product_label.setStyleSheet("font: 100 13pt 'Segoe UI';")
         # Combobox for products that are already in database
-        self.set_product_combobox = FormCombobox(enabled=False)
+        self.set_product_combobox = FormCombobox(enabled=False, editable=True)
         # A line edit in case the product is a new one
         self.new_product_linedit = FormLineEdit(visibility=True)
         # A checkbox to tell if the product is a new one
@@ -151,13 +151,13 @@ class UIStockStackedPages(object):
         self.add_buy_layout.addWidget(self.stock_btn_frame)
 
         # Making the widgets for see stock page
-        self.stock_list = QWidget()
-        self.stock_list.setObjectName(u"stock_list")
+        self.stock_list_page = QWidget()
+        self.stock_list_page.setObjectName(u"stock_list_page")
          # Setting up a layout for add buy page
-        self.stock_list_layout = QVBoxLayout(self.stock_list)
-        self.stock_list_layout.setContentsMargins(10, 10, 10, 10)
-        self.stock_list_layout.setSpacing(10)
-        self.stock_list_layout.setAlignment(Qt.AlignVCenter)
+        self.stock_list_page_layout = QVBoxLayout(self.stock_list_page)
+        self.stock_list_page_layout.setContentsMargins(10, 10, 10, 10)
+        self.stock_list_page_layout.setSpacing(10)
+        self.stock_list_page_layout.setAlignment(Qt.AlignVCenter)
         # Making the elements that are going to fit within this layout
         # A frame to hold the 'products' widgets
         self.select_product = QFrame()
@@ -172,47 +172,50 @@ class UIStockStackedPages(object):
         self.select_product_label = QLabel("Product")
         self.select_product_label.setStyleSheet("font: 100 13pt 'Segoe UI';")
         # Combobox for products that are already in database
-        self.select_product_combobox = FormCombobox(visible=True, enabled=False)
+        self.select_product_combobox = FormCombobox(visible=True, enabled=False, editable=True)
         self.select_product_combobox.setEditable(True)
+        # A checkbox to show all of the products
+        self.show_all_products_checkbox = QCheckBox("Show all")
+        self.show_all_products_checkbox.setChecked(False)
         # Adding this to the layout
         self.select_product_layout.addWidget(self.select_product_label)
         self.select_product_layout.addWidget(self.select_product_combobox)
 
         # A table to show the products
-        self.show_stock_list_table = QTableWidget()
-        self.show_stock_list_table.setMinimumWidth(724)
-        self.show_stock_list_table.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        self.show_stock_list_table.setStyleSheet("background-color: white;")
+        self.show_stock_list_page_table = QTableWidget()
+        self.show_stock_list_page_table.setMinimumWidth(724)
+        self.show_stock_list_page_table.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.show_stock_list_page_table.setStyleSheet("background-color: white;")
         # Setting the columns
         column_font = QFont()
         column_font.setFamily('Segoe UI')
         column_font.setPointSize(12)
         column_font.setBold(True)
         column_font.setWeight(QFont.Weight.Bold)
-        if self.show_stock_list_table.columnCount() < len(SHOW_TABLE_COLUMS):
-            self.show_stock_list_table.setColumnCount(len(SHOW_TABLE_COLUMS))
+        if self.show_stock_list_page_table.columnCount() < len(SHOW_TABLE_COLUMS):
+            self.show_stock_list_page_table.setColumnCount(len(SHOW_TABLE_COLUMS))
         for i, column in enumerate(SHOW_TABLE_COLUMS, 0):
             item = QTableWidgetItem()
             item.setText(column)
             item.setTextAlignment(Qt.AlignCenter)
             item.setFont(column_font)
-            self.show_stock_list_table.setHorizontalHeaderItem(i, item)
-        self.show_stock_list_table.horizontalHeader().setDefaultSectionSize(100)
-        self.show_stock_list_table.horizontalHeader().setMinimumSectionSize(80)
+            self.show_stock_list_page_table.setHorizontalHeaderItem(i, item)
+        self.show_stock_list_page_table.horizontalHeader().setDefaultSectionSize(100)
+        self.show_stock_list_page_table.horizontalHeader().setMinimumSectionSize(80)
         # Formatting the size for each header
         for i, size in enumerate(SHOW_TABLE_SIZE_FORMAT, 0):
-            self.show_stock_list_table.horizontalHeader().setSectionResizeMode(i, size)
+            self.show_stock_list_page_table.horizontalHeader().setSectionResizeMode(i, size)
         # Showing horizontal header and hiding vertical
-        self.show_stock_list_table.horizontalHeader().setVisible(True)
-        self.show_stock_list_table.verticalHeader().setVisible(False)
+        self.show_stock_list_page_table.horizontalHeader().setVisible(True)
+        self.show_stock_list_page_table.verticalHeader().setVisible(False)
 
         # Adding the select product frame and table to this layout
-        self.stock_list_layout.addWidget(self.select_product)
-        self.stock_list_layout.addWidget(self.show_stock_list_table)
+        self.stock_list_page_layout.addWidget(self.select_product)
+        self.stock_list_page_layout.addWidget(self.show_stock_list_page_table)
 
         # Adding both pages to the stacked stock pages.
         StockStackedPages.addWidget(self.add_buy_page)
-        StockStackedPages.addWidget(self.stock_list)
+        StockStackedPages.addWidget(self.stock_list_page)
 
         StockStackedPages.setCurrentWidget(self.add_buy_page)
         

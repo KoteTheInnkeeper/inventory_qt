@@ -1,6 +1,7 @@
 import logging
 import os
-
+logging.basicConfig(format="%(asctime)s %(levelname)-8s [%(filename)s:%(lineno)d] func:%(funcName)s - %(message)s", level=logging.DEBUG,
+                    filename='log.log')
 
 from typing import List, Union
 from data.database_cursor import *
@@ -91,7 +92,7 @@ class Database:
                 cursor.execute("SELECT name FROM items")
                 results = cursor.fetchall()
                 if results:
-                    return [product_name for (product_name, ) in results]
+                    return [product_name.upper() for (product_name, ) in results]
                 else:
                     raise ProductsNotFound("There were no products to be displayed.")
         except ProductsNotFound:

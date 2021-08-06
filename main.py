@@ -67,7 +67,7 @@ class MainWindow(QMainWindow):
         # Signal for the clear list button at add stock
         self.ui.ui_pages.ui_stock_stacked_pages.clear_stock_btn.clicked.connect(self.clear_buy_list)
         # Signal for add to stock
-        self.ui.ui_pages.ui_stock_stacked_pages.add_stock_btn.clicked.connect(self.get_buy_items)
+        self.ui.ui_pages.ui_stock_stacked_pages.add_stock_btn.clicked.connect(self.add_products_to_stock)
 
     
         # Showing the sell page first
@@ -204,11 +204,16 @@ class MainWindow(QMainWindow):
         self.ui.ui_pages.ui_stock_stacked_pages.buy_list_table.clearContents()
         self.ui.ui_pages.ui_stock_stacked_pages.buy_list_table.setRowCount(0)
     
-    def get_buy_items(self):
+    def add_products_to_stock(self):
         """Get's the buy items from the table."""
         log.info("Getting the products list from the add buy table.")
         products_list = UICode.get_table_rows_text(self.ui.ui_pages.ui_stock_stacked_pages.buy_list_table)
-        print(products_list)
+        for product in products_list:
+            if product[0] == "NEW":
+                Product(**product)
+            
+
+        
     
 
 class UICode:

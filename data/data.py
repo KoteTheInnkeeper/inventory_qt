@@ -63,7 +63,7 @@ class Database:
         product_parameters = product.to_db()
         try:
             with DBCursor(self.host) as cursor:
-                cursor.execute("INSERT INTO items VALUES (?, ?, ?)", (product_parameters['name'], product_parameters['cost'], product_parameters['price']))
+                cursor.execute("INSERT INTO items VALUES (?, ?, ?, ?)", (product_parameters['name'], product_parameters['units'], product_parameters['cost'], product_parameters['price']))
         except sqlite3.IntegrityError:
             log.critical("An integrity error was raised. Maybe a matching name or id.")
             raise DatabaseIntegrityError("There's a matching name or id already stored.")
@@ -75,7 +75,7 @@ class Database:
         log.debug("Updating a product.")
         try:
             with DBCursor(self.host) as cursor:
-                cursor.execute("UPDATE items SET name = ?, cost_price = ?, sell_price = ? WHERE rowid = ?", (prod_param['name'], prod_param['cost'], prod_param['price'], prod_param['id']))
+                cursor.execute("UPDATE items SET name = ?, units = units + ?,cost_price = ?, sell_price = ? WHERE rowid = ?", (prod_param['name'], prod_param['units'], prod_param['cost'], prod_param['price'], prod_param['id']))
         except Exception:
             log.critical("An exception was raised.")
             raise
@@ -83,6 +83,7 @@ class Database:
             log.info(f"{product.__repr__} was updated successfully.")
     
     def get_product_names(self) -> List[str]:
+        log.debug("Getting a list with all product's names.")
         try:
             with DBCursor(self.host) as cursor:
                 cursor.execute("SELECT name FROM items")
@@ -98,7 +99,7 @@ class Database:
             log.critical("An exception was raised.")
             raise
         
-    def get_product_id(self, name: str) -> Union[str, int]:
+    def get_product_id(self, name: str) -> str:
         log.info("Getting a product's id by its name.")
         try:
             with DBCursor as cursor:
@@ -106,11 +107,10 @@ class Database:
                 result = cursor.fetchone()
                 if result:
                     log.debug("Product found. Returning the id.")
-                    return result[0]
+                    return str(result[0])
                 else:
                     log.error("There's no match for this name. Returning NEW")
                     return "NEW"
-                    
         except Exception:
             log.critical("An exception was raised.")
             raise

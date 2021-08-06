@@ -167,6 +167,10 @@ class MainWindow(QMainWindow):
         price = self.ui.ui_pages.ui_stock_stacked_pages.price_lineedit.text()
         units = self.ui.ui_pages.ui_stock_stacked_pages.units_lineedit.text()
 
+        if not (name and id and cost and price and units):
+            QMessageBox.critical(self, "Error", "Make sure you're filling all the fields.")
+            return None
+
         # Writing it to the table       
         id = QTableWidgetItem(id)
         name = QTableWidgetItem(name)

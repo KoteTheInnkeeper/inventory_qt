@@ -17,3 +17,7 @@ class ProductsNotFound(Exception):
 class ProductNotFound(Exception):
     def __init__(self, message: str) -> None:
         super().__init__(message)
+
+class NoProductsSpecified(Exception):
+    def __init__(self, message: str) -> None:
+        super().__init__(message)

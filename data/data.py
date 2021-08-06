@@ -35,6 +35,7 @@ class Database:
         else:
             try:
                 self.setup_tables()
+                return True
             except Exception:
                 log.critical("An exception was raised.")
                 raise
@@ -103,7 +104,7 @@ class Database:
     def get_product_id(self, name: str) -> str:
         log.info("Getting a product's id by its name.")
         try:
-            with DBCursor as cursor:
+            with DBCursor(self.host) as cursor:
                 cursor.execute("SELECT rowid FROM items WHERE name = ?", (name.lower(),))
                 result = cursor.fetchone()
                 if result:

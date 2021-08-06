@@ -198,23 +198,44 @@ class MainWindow(QMainWindow):
             self.ui.ui_pages.ui_stock_stacked_pages.buy_list_table.setItem(row, i, parameter)
         
         self.clear_fields(self.ui.ui_pages.ui_stock_stacked_pages.set_product_frame)
+
+    
     
     def clear_buy_list(self):
         """Clears the table where we show what's currently being added to the list."""
-        self.ui.ui_pages.ui_stock_stacked_pages.buy_list_table.clearContents()
-        self.ui.ui_pages.ui_stock_stacked_pages.buy_list_table.setRowCount(0)
+        log.debug("A clearing of the buy list table was issued.")
+        UICode.clear_table(self.ui.ui_pages.ui_stock_stacked_pages.buy_list_table)
     
     def add_products_to_stock(self):
         """Get's the buy items from the table."""
         log.info("Getting the products list from the add buy table.")
-        products_list = UICode.get_table_rows_text(self.ui.ui_pages.ui_stock_stacked_pages.buy_list_table)
-        for product in products_list:
-            if product[0] == "NEW":
-                Product(**product)
-            
-
-        
-    
+        try:
+            products_list = UICode.get_table_rows_text(self.ui.ui_pages.ui_stock_stacked_pages.buy_list_table)
+            for product in products_list:
+                if product[0] == "NEW":
+                    product.pop(0)
+                    log.debug("Adding a new product")
+                    product_obj = Product(*product)
+                    db.add_product(product_obj)                
+                else:
+                    product_obj = StoredProduct(*product)
+                    db.update_product(product_obj)
+        except DatabaseIntegrityError:
+            log.error("There's a product with the same name and this one was marked as a new one.")
+            QMessageBox.critical(self, "Error", f"There's already a product named {product_obj.name.upper()}. Please, search it in the list instead.")
+        except NoProductsSpecified:
+            log.error("There were no products to add in the table.")
+            QMessageBox.critical(self, "Error", "There were no products to add. Please, enter at least one.")
+        except Exception:
+            log.critical("An exception was raised.")
+            QMessageBox.critical(self, "Error", "There was an error trying to add all the products. Check log file.")
+            raise
+        else:
+            QMessageBox.about(self, "Stock buy added", "The bought products were added to stock successfully.")
+        finally:
+            log.debug("Clearing the table")
+            self.clear_buy_list()
+ 
 
 class UICode:
     @classmethod
@@ -223,6 +244,8 @@ class UICode:
         :param table: QTableWidget with ONLY STRINGS. Won't work if a cell has a widget."""
         log.debug(f"Getting items from a table called {table.objectName()}.")
         rows = table.rowCount()
+        if not rows:
+            raise NoProductsSpecified("There are no products in the list to be added.")
         columns = table.columnCount()
         row_list = []
         for row in range(0, rows):
@@ -232,6 +255,13 @@ class UICode:
                 this_row.append(item)
             row_list.append(this_row)
         return row_list
+
+    @classmethod
+    def clear_table(self, table: QTableWidget) -> None:
+        """Clears the table without erasing the headers."""
+        log.debug(f"Clearing the {table.objectName()} table.")
+        table.clearContents()
+        table.setRowCount(0)
 
 
         

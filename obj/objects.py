@@ -17,7 +17,7 @@ class Product:
             raise InvalidType("An invalid type was specified for at least one of this product's parameters.")
 
     def __repr__(self) -> str:
-        return f"<PRODUCT OBJECT identified with name '{self.name.upper()}'"
+        return f"<PRODUCT OBJECT identified with name '{self.name.upper()}': C {self.cost}, P {self.price}; U {self.units}>"
 
     def to_db(self) -> dict:
         return {
@@ -29,7 +29,7 @@ class Product:
 
 
 class StoredProduct(Product):
-    def __init__(self, name: str, units: int, cost: float, price: float, id: int):
+    def __init__(self, id: int, name: str, units: int, cost: float, price: float):
         try:
             super().__init__(name, units, cost, price)
             self.id = int(id)
@@ -38,7 +38,7 @@ class StoredProduct(Product):
             raise InvalidType("The id wasn't an integer.")
     
     def __repr__(self) -> str:
-        return  f"<STORED PRODUCT OBJECT identified with name {self.name.upper()}"
+        return  f"<STORED PRODUCT OBJECT identified with name {self.name.upper()} and id {self.id}: C {self.cost}; P {self.cost}; U {self.units}"
     
     def to_db(self) -> dict:
         return {

@@ -176,10 +176,11 @@ class UIStockStackedPages(object):
         self.select_product_combobox.setEditable(True)
         # A checkbox to show all of the products
         self.show_all_products_checkbox = QCheckBox("Show all")
-        self.show_all_products_checkbox.setChecked(False)
+        self.show_all_products_checkbox.setChecked(True)
         # Adding this to the layout
         self.select_product_layout.addWidget(self.select_product_label)
         self.select_product_layout.addWidget(self.select_product_combobox)
+        self.select_product_layout.addWidget(self.show_all_products_checkbox)
 
         # A table to show the products
         self.show_stock_list_page_table = QTableWidget()

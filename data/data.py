@@ -1,7 +1,9 @@
 import logging
 import os
+import time
 logging.basicConfig(format="%(asctime)s %(levelname)-8s [%(filename)s:%(lineno)d] func:%(funcName)s - %(message)s", level=logging.DEBUG,
                     filename='log.log')
+
 
 from typing import List, Union
 from data.database_cursor import *
@@ -9,7 +11,6 @@ from obj.objects import *
 from utils.errors import *
 
 log = logging.getLogger("inventory_qt.data")
-
 
 class Database:
     def __init__(self, host: str) -> None:
@@ -45,7 +46,7 @@ class Database:
         try:
             log.debug("Making sure the tables are created.")
             with DBCursor(self.host) as cursor:
-                cursor.execute("CREATE TABLE IF NOT EXISTS items(name TEXT UNIQUE, units INTEGER,cost_price REAL, sell_price REAL)")
+                cursor.execute("CREATE TABLE IF NOT EXISTS items(name TEXT UNIQUE, units INTEGER, last_buy REAL, cost_price REAL, sell_price REAL)")
                 cursor.execute("CREATE TABLE IF NOT EXISTS sold(item TEXT, units INTEGER, date REAL, total REAL)")
         except Exception:
             log.critical("An exception was raised.")
@@ -66,7 +67,7 @@ class Database:
         product_parameters = product.to_db()
         try:
             with DBCursor(self.host) as cursor:
-                cursor.execute("INSERT INTO items VALUES (?, ?, ?, ?)", (product_parameters['name'].lower(), product_parameters['units'], product_parameters['cost'], product_parameters['price']))
+                cursor.execute("INSERT INTO items VALUES (?, ?, ?, ?, ?)", (product_parameters['name'].lower(), product_parameters['units'], product_parameters['last_buy'], product_parameters['cost'], product_parameters['price']))
         except sqlite3.IntegrityError:
             log.critical("An integrity error was raised. Maybe a matching name or id.")
             raise DatabaseIntegrityError("There's a matching name or id already stored.")
@@ -78,7 +79,7 @@ class Database:
         log.debug("Updating a product.")
         try:
             with DBCursor(self.host) as cursor:
-                cursor.execute("UPDATE items SET name = ?, units = units + ?,cost_price = ?, sell_price = ? WHERE rowid = ?", (prod_param['name'], prod_param['units'], prod_param['cost'], prod_param['price'], prod_param['id']))
+                cursor.execute("UPDATE items SET name = ?, units = units + ?, last_buy = ?, cost_price = ?, sell_price = ? WHERE rowid = ?", (prod_param['name'], prod_param['units'], prod_param['last_buy'], prod_param['cost'], prod_param['price'], prod_param['id']))
         except Exception:
             log.critical("An exception was raised.")
             raise
@@ -127,6 +128,32 @@ class Database:
                 return True
             else:
                 return False
+    
+    def get_stock(self, name: str="all") -> List[QTableWidgetItem]:
+        """Gets the stock for the product provided in name. If no name was specified, it does it for all of them."""
+        try:
+            if name != "all":
+                log.debug(f"Getting the stock for {name.upper()}.")
+            else:
+                log.debug("Getting the stock for all products.")
+                with DBCursor(self.host) as cursor:
+                    cursor.execute("SELECT rowid, name, units, last_buy, cost_price, sell_price FROM items")
+                    results = cursor.fetchall()
+                    if not results:
+                        log.error("There were no products to show at all.")
+                        raise ProductsNotFound("There are no products to show.")
+                    product_list = []
+                    for product in results:
+                        product_list.append(StoredProduct(*product).to_table())
+        except Exception:
+            log.critical("An exception was raised.")
+            raise
+        else:
+            log.debug("A StoredProduct list was consumated.")
+            return product_list
+
+
+
 
     
         

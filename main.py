@@ -1,4 +1,5 @@
 import logging
+import time
 # Erasing previous log
 with open('log.log', 'w'):
     pass
@@ -79,11 +80,9 @@ class MainWindow(QMainWindow):
         # Signal for add to stock
         self.ui.ui_pages.ui_stock_stacked_pages.add_stock_btn.clicked.connect(self.add_products_to_stock)
 
-
         # Signal for the checkbox to show all products
         self.ui.ui_pages.ui_stock_stacked_pages.show_all_products_checkbox.toggled.connect(self.toggled_show_all_products_checkbox)
 
-    
         # Showing the sell page first
         self.show_sell()
 
@@ -166,7 +165,10 @@ class MainWindow(QMainWindow):
         """"Displays the add stock page."""
         self.clear_btns(self.ui.ui_pages.stock_menu)
         self.ui.ui_pages.show_stock_btn.set_active(True)
+        log.debug("Rendering the table for all products.")
+        UICode.fill_stock_table(self.ui.ui_pages.ui_stock_stacked_pages.select_product_combobox, self.ui.ui_pages.ui_stock_stacked_pages.show_all_products_checkbox, self.ui.ui_pages.ui_stock_stacked_pages.show_stock_list_page_table)
         self.ui.ui_pages.stock_stacked_widget.setCurrentWidget(self.ui.ui_pages.ui_stock_stacked_pages.stock_list_page)
+
 
     def add_product_to_list(self):
         """Adds the product to the list."""
@@ -224,10 +226,10 @@ class MainWindow(QMainWindow):
                 if product[0] == "NEW":
                     product.pop(0)
                     log.debug("Adding a new product")
-                    product_obj = Product(*product)
+                    product_obj = Product(*product[0:2], last_buy=time.time(), *product[2:])
                     db.add_product(product_obj)                
                 else:
-                    product_obj = StoredProduct(*product)
+                    product_obj = StoredProduct(*product[0:2], last_buy=time.time(), *product[2:])
                     db.update_product(product_obj)
         except DatabaseIntegrityError:
             log.error("There's a product with the same name and this one was marked as a new one.")
@@ -242,6 +244,9 @@ class MainWindow(QMainWindow):
         else:
             QMessageBox.about(self, "Stock buy added", "The bought products were added to stock successfully.")
         finally:
+            log.debug("Updating comboboxes")
+            UICode.update_comboboxes(self.ui.ui_pages.ui_stock_stacked_pages.add_buy_page, db.get_product_names())
+            UICode.update_comboboxes(self.ui.ui_pages.ui_stock_stacked_pages.stock_list_page, db.get_product_names())
             log.debug("Clearing the table")
             self.clear_buy_list()
 
@@ -276,13 +281,15 @@ class UICode:
         log.debug(f"Clearing the {table.objectName()} table.")
         table.clearContents()
         table.setRowCount(0)
-
+    
     @classmethod
     def update_comboboxes(self, frame: Union[QFrame, QWidget], list: List):
         """Updates all comboboxes in the given frame."""
+        log.debug("Clearing combobox.")
         # Products ones
         if list:
             for combobox in frame.findChildren(QComboBox):
+                combobox.clear()
                 combobox.addItems(list)
             combobox.setEnabled(True)
             combobox.set_style()
@@ -295,6 +302,30 @@ class UICode:
             checkbox.setChecked(False)
             combobox.setVisible(True)
             line_edit.setVisible(False)
+    
+    @classmethod
+    def fill_stock_table(cls, combobox: FormCombobox, checkbox: QCheckBox, table: QTableWidget, db: Database) -> None:
+        """If the checkbox is checked, renders the table for all products."""
+        try:
+            if checkbox.isChecked():
+                log.debug("Rendering for all products")
+                product_list = db.get_stock()
+                # Clearing the table
+                table.clearContents()
+                table.setRowCount(0)
+                # Making sure there's enough rows in the table
+                for row in range(0, len(product_list)):
+                    if not (table.rowCount() == len(product_list)):
+                        table.insertRow(row)
+                    for column, stored_product in enumerate(product_list):
+                        table.setItem(row, column, )
+                        pass
+            else:
+                log.debug("Rendering for one product")
+        except Exception:
+            log.critical("An exception was raised.")
+            raise
+
 
         
         

@@ -19,7 +19,8 @@ class Database:
 
         # Check file and creates it if it doesn't exist.
         if not self.check_file():
-            pass
+            with open(self.host, 'w'):
+                log.info("Database file created")
 
     def check_file(self) -> bool:
         """Checks if the database exists and returns True or False."""
@@ -41,8 +42,8 @@ class Database:
         try:
             log.debug("Making sure the tables are created.")
             with DBCursor(self.host) as cursor:
-                cursor.execute("CREATE TABLE IF NOT EXISTS items(name TEXT UNIQUE, cost_price REAL, sell_price REAL)")
-                cursor.execute("CREATE TABLE IF NOT EXISTS sold(items TEXT, date REAL, total REAL)")
+                cursor.execute("CREATE TABLE IF NOT EXISTS items(name TEXT UNIQUE, units INTEGER,cost_price REAL, sell_price REAL)")
+                cursor.execute("CREATE TABLE IF NOT EXISTS sold(item TEXT, units INTEGER, date REAL, total REAL)")
         except Exception:
             log.critical("An exception was raised.")
             raise

@@ -5,10 +5,11 @@ from utils.errors import InvalidType
 log = logging.getLogger("inventory_qt.objects")
 
 class Product:
-    def __init__(self, name: str, cost: float, price: float):
+    def __init__(self, name: str, units: str, cost: float, price: float):
         try:
             log.info("Making a new <<PRODUCT>> object.")
             self.name = str(name).lower()
+            self.units = int(units)
             self.cost = float(cost)
             self.price = float(price)
         except ValueError:
@@ -21,6 +22,7 @@ class Product:
     def to_db(self) -> dict:
         return {
             'name': self.name,
+            'units': self.units,
             'cost': self.cost,
             'price': self.price
         }

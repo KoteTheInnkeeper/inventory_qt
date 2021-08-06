@@ -29,9 +29,9 @@ class Product:
 
 
 class StoredProduct(Product):
-    def __init__(self, name: str, cost: float, price: float, id: int):
+    def __init__(self, name: str, units: int, cost: float, price: float, id: int):
         try:
-            super().__init__(name, cost, price)
+            super().__init__(name, units, cost, price)
             self.id = int(id)
         except ValueError:
             log.critical("The id wasn't an integer.")
@@ -44,6 +44,7 @@ class StoredProduct(Product):
         return {
             'id': self.id,
             'name': self.name,
+            'units': self.units,
             'cost': self.cost,
             'price': self.price
         }

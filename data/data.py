@@ -21,6 +21,7 @@ class Database:
         if not self.check_file():
             with open(self.host, 'w'):
                 log.info("Database file created")
+        self.setup_tables()
 
     def check_file(self) -> bool:
         """Checks if the database exists and returns True or False."""
@@ -38,7 +39,7 @@ class Database:
                 log.critical("An exception was raised.")
                 raise
 
-    def setup_tables(self) -> True:
+    def setup_tables(self) -> None:
         try:
             log.debug("Making sure the tables are created.")
             with DBCursor(self.host) as cursor:
@@ -63,7 +64,7 @@ class Database:
         product_parameters = product.to_db()
         try:
             with DBCursor(self.host) as cursor:
-                cursor.execute("INSERT INTO items VALUES (?, ?, ?, ?)", (product_parameters['name'], product_parameters['units'], product_parameters['cost'], product_parameters['price']))
+                cursor.execute("INSERT INTO items VALUES (?, ?, ?, ?)", (product_parameters['name'].lower(), product_parameters['units'], product_parameters['cost'], product_parameters['price']))
         except sqlite3.IntegrityError:
             log.critical("An integrity error was raised. Maybe a matching name or id.")
             raise DatabaseIntegrityError("There's a matching name or id already stored.")
@@ -114,6 +115,18 @@ class Database:
         except Exception:
             log.critical("An exception was raised.")
             raise
+    
+    def check_product_existance(self, name: str) -> bool:
+        log.info("Guessing if the product exist already in database.")
+        with DBCursor(self.host) as cursor:
+            cursor.execute("SELECT rowid FROM items WHERE name = ?", (name.lower(), ))
+            result = cursor.fetchone()
+            if result:
+                return True
+            else:
+                return False
+
+    
         
     
     

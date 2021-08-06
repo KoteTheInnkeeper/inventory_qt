@@ -1,3 +1,4 @@
+from obj.objects import Product, StoredProduct
 import sys
 import logging
 logging.basicConfig(format="%(asctime)s %(levelname)-8s [%(filename)s:%(lineno)d] func:%(funcName)s - %(message)s", level=logging.DEBUG,
@@ -10,6 +11,7 @@ log = logging.getLogger("inventory_project")
 
 from qt_core import *
 from utils.errors import *
+from typing import List
 
 # Erasing previous log
 with open('log.log', 'w'):
@@ -64,6 +66,8 @@ class MainWindow(QMainWindow):
         self.ui.ui_pages.ui_stock_stacked_pages.add_product_btn.clicked.connect(self.add_product_to_list)
         # Signal for the clear list button at add stock
         self.ui.ui_pages.ui_stock_stacked_pages.clear_stock_btn.clicked.connect(self.clear_buy_list)
+        # Signal for add to stock
+        self.ui.ui_pages.ui_stock_stacked_pages.add_stock_btn.clicked.connect(self.get_buy_items)
 
     
         # Showing the sell page first
@@ -159,7 +163,10 @@ class MainWindow(QMainWindow):
         # Getting the info from the lineedits/combobox
         if self.ui.ui_pages.ui_stock_stacked_pages.new_product_checkbox.isChecked():
             name = self.ui.ui_pages.ui_stock_stacked_pages.new_product_linedit.text().strip().upper()
-            id = "NEW"
+            if not db.check_product_existance(name):
+                id = "NEW"
+            else:
+                id = str(db.get_product_id(name.lower()))
         else:
             name = self.ui.ui_pages.ui_stock_stacked_pages.set_product_combobox.currentText().strip().upper()
             id = str(db.get_product_id(name.lower()))
@@ -196,6 +203,34 @@ class MainWindow(QMainWindow):
         """Clears the table where we show what's currently being added to the list."""
         self.ui.ui_pages.ui_stock_stacked_pages.buy_list_table.clearContents()
         self.ui.ui_pages.ui_stock_stacked_pages.buy_list_table.setRowCount(0)
+    
+    def get_buy_items(self):
+        """Get's the buy items from the table."""
+        log.info("Getting the products list from the add buy table.")
+        products_list = UICode.get_table_rows_text(self.ui.ui_pages.ui_stock_stacked_pages.buy_list_table)
+        print(products_list)
+    
+
+class UICode:
+    @classmethod
+    def get_table_rows_text(cls, table: QTableWidget) -> List:
+        """Gets the cells texts for each row in a QTableWidget. Only works if the cells don't have any widgets.
+        :param table: QTableWidget with ONLY STRINGS. Won't work if a cell has a widget."""
+        log.debug(f"Getting items from a table called {table.objectName()}.")
+        rows = table.rowCount()
+        columns = table.columnCount()
+        row_list = []
+        for row in range(0, rows):
+            this_row = []
+            for column in range(0, columns):
+                item = table.item(row, column).text()
+                this_row.append(item)
+            row_list.append(this_row)
+        return row_list
+
+
+        
+        
     
 
         

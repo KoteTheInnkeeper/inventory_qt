@@ -4,6 +4,7 @@ import logging
 from qt_core import *
 from utils.errors import *
 from typing import List, Tuple
+from datetime import datetime
 
 
 log = logging.getLogger("inventory_qt.objects")
@@ -57,19 +58,21 @@ class StoredProduct(Product):
         }
     
     def to_table(self) -> Tuple[QTableWidgetItem]:
+        # Getting the 'last buy' as a formated date.
+        formated_date = datetime.fromtimestamp(self.last_buy).strftime("%d/%m/%Y - %H:%M")
         id = QTableWidgetItem(str(self.id))
-        id.setTextAlignment(Qt.Aligncenter)
-        name = QTableWidgetItem(str(self.name))
-        name.setTextAlignment(Qt.Aligncenter)
+        id.setTextAlignment(Qt.AlignCenter)
+        name = QTableWidgetItem(str(self.name.upper()))
+        name.setTextAlignment(Qt.AlignCenter)
         units = QTableWidgetItem(str(self.units))
-        units.setTextAlignment(Qt.Aligncenter)
-        last_buy = QTableWidgetItem(str(self.last_buy))
-        last_buy.setTextAlignment(Qt.Aligncenter)
-        cost = QTableWidgetItem("%.2f" %str(self.cost) if self.cost != 0 else "0")
-        cost.setTextAlignment(Qt.Aligncenter)
-        price = QTableWidgetItem("%.2f" %str(self.price) if self.price != 0 else "0")
-        price.setTextAlignment(Qt.Aligncenter)
-        return (id, name, units, cost, price)
+        units.setTextAlignment(Qt.AlignCenter)
+        last_buy = QTableWidgetItem(formated_date)
+        last_buy.setTextAlignment(Qt.AlignCenter)
+        cost = QTableWidgetItem("%.2f" %self.cost if self.cost != 0 else "0")
+        cost.setTextAlignment(Qt.AlignCenter)
+        price = QTableWidgetItem("%.2f" %self.price if self.price != 0 else "0")
+        price.setTextAlignment(Qt.AlignCenter)
+        return (id, name, last_buy, cost, price, units)
 
 
     

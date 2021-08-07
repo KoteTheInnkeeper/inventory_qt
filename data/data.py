@@ -134,6 +134,14 @@ class Database:
         try:
             if name != "all":
                 log.debug(f"Getting the stock for {name.upper()}.")
+                with DBCursor(self.host) as cursor:
+                    cursor.execute("SELECT rowid, name, units, last_buy, cost_price, sell_price FROM items WHERE name = ?", (name.lower(), ))
+                    result = cursor.fetchone()
+                    if result:
+                        log.debug("There was a product named like soo, returning a StoredProduct for it.")
+                        return StoredProduct(*result).to_table()
+                    else:
+                        raise ProductNotFound("There was no product named like so.")
             else:
                 log.debug("Getting the stock for all products.")
                 with DBCursor(self.host) as cursor:

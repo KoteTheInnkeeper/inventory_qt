@@ -1,5 +1,6 @@
 import logging
 import time
+import sys
 # Erasing previous log
 with open('log.log', 'w'):
     pass
@@ -16,7 +17,8 @@ log = logging.getLogger("inventory_project")
 
 from gui.widgets.py_combobox import FormCombobox
 from obj.objects import Product, StoredProduct
-import sys
+from gui.widgets.ui_stacked_stock_widget import SHOW_TABLE_COLUMS
+
 
 
 from qt_core import *
@@ -50,6 +52,9 @@ class MainWindow(QMainWindow):
         # Populating product comboboxes properly
         UICode.update_comboboxes(self.ui.ui_pages.ui_stock_stacked_pages.add_buy_page, db.get_product_names())
         UICode.update_comboboxes(self.ui.ui_pages.ui_stock_stacked_pages.stock_list_page, db.get_product_names())
+        # Disabling the one for the stock list by default, since the "show all" checkbox will be checked also by default
+        self.ui.ui_pages.ui_stock_stacked_pages.select_product_combobox.setEnabled(False)
+        self.ui.ui_pages.ui_stock_stacked_pages.select_product_combobox.set_style()
 
         # Choosing what to show first at add_product
         UICode.lineedit_or_combobox(
@@ -82,6 +87,9 @@ class MainWindow(QMainWindow):
 
         # Signal for the checkbox to show all products
         self.ui.ui_pages.ui_stock_stacked_pages.show_all_products_checkbox.toggled.connect(self.toggled_show_all_products_checkbox)
+
+        # Signal for when the current text has changed in the show stock combobox
+        self.ui.ui_pages.ui_stock_stacked_pages.select_product_combobox.currentTextChanged.connect(self.product_name_has_changed)
 
         # Showing the sell page first
         self.show_sell()
@@ -163,12 +171,19 @@ class MainWindow(QMainWindow):
     
     def show_stock_list_page(self):
         """"Displays the add stock page."""
-        self.clear_btns(self.ui.ui_pages.stock_menu)
-        self.ui.ui_pages.show_stock_btn.set_active(True)
-        log.debug("Rendering the table for all products.")
-        UICode.fill_stock_table(self.ui.ui_pages.ui_stock_stacked_pages.select_product_combobox, self.ui.ui_pages.ui_stock_stacked_pages.show_all_products_checkbox, self.ui.ui_pages.ui_stock_stacked_pages.show_stock_list_page_table)
-        self.ui.ui_pages.stock_stacked_widget.setCurrentWidget(self.ui.ui_pages.ui_stock_stacked_pages.stock_list_page)
-
+        try:
+            self.ui.ui_pages.ui_stock_stacked_pages.select_product_combobox.setEnabled(not self.ui.ui_pages.ui_stock_stacked_pages.show_all_products_checkbox.isChecked())
+            self.ui.ui_pages.ui_stock_stacked_pages.select_product_combobox.set_style()
+            log.debug("Rendering the table for all products.")
+            UICode.fill_stock_table(self.ui.ui_pages.ui_stock_stacked_pages.select_product_combobox, self.ui.ui_pages.ui_stock_stacked_pages.show_all_products_checkbox, self.ui.ui_pages.ui_stock_stacked_pages.show_stock_list_page_table, db)
+            self.ui.ui_pages.stock_stacked_widget.setCurrentWidget(self.ui.ui_pages.ui_stock_stacked_pages.stock_list_page)
+        except ProductsNotFound:
+            QMessageBox.critical(self, "No stored products", "At the moment, there are no products stored. You can add them in the 'add buy' section.")
+        except Exception:
+            log.critical("An exception was raised.")
+        else:
+            self.clear_btns(self.ui.ui_pages.stock_menu)
+            self.ui.ui_pages.show_stock_btn.set_active(True)
 
     def add_product_to_list(self):
         """Adds the product to the list."""
@@ -226,10 +241,10 @@ class MainWindow(QMainWindow):
                 if product[0] == "NEW":
                     product.pop(0)
                     log.debug("Adding a new product")
-                    product_obj = Product(*product[0:2], last_buy=time.time(), *product[2:])
+                    product_obj = Product(product[0], product[1], time.time(), product[2], product[3])
                     db.add_product(product_obj)                
                 else:
-                    product_obj = StoredProduct(*product[0:2], last_buy=time.time(), *product[2:])
+                    product_obj = StoredProduct(product[0], product[1], product[2], time.time(), product[3], product[4])
                     db.update_product(product_obj)
         except DatabaseIntegrityError:
             log.error("There's a product with the same name and this one was marked as a new one.")
@@ -253,7 +268,36 @@ class MainWindow(QMainWindow):
     def toggled_show_all_products_checkbox(self, state: bool):
         """If it's checked, then it shows all products. Otherwise, it just shows the one selected."""
         log.debug("The 'show all products' checkbox was toggled.")
-        pass
+        self.ui.ui_pages.ui_stock_stacked_pages.select_product_combobox.setEnabled(not state)
+        self.ui.ui_pages.ui_stock_stacked_pages.select_product_combobox.set_style()
+        try:
+            UICode.fill_stock_table(
+                self.ui.ui_pages.ui_stock_stacked_pages.select_product_combobox,
+                state,
+                self.ui.ui_pages.ui_stock_stacked_pages.show_stock_list_page_table,
+                db
+            )
+        except ProductNotFound:
+            log.critical("There was no product found with this name.")
+            QMessageBox.critical(self, "Product not found", f"We couldn't find infor for {self.ui.ui_pages.ui_stock_stacked_pages.select_product_combobox.currentText()}.")
+        except Exception:
+            log.critical("An exception was raised.")
+            raise
+    
+    def product_name_has_changed(self):
+        """Passes down the new selected name."""
+        log.info("The text within the product combobox has changed.")
+        try:
+            UICode.fill_stock_table(
+                self.ui.ui_pages.ui_stock_stacked_pages.select_product_combobox,
+                self.ui.ui_pages.ui_stock_stacked_pages.show_all_products_checkbox.isChecked(),
+                self.ui.ui_pages.ui_stock_stacked_pages.show_stock_list_page_table,
+                db
+            )
+        except ProductNotFound:
+            log.critical("There are no products called like so.")
+            pass
+    
  
 
 class UICode:
@@ -304,24 +348,31 @@ class UICode:
             line_edit.setVisible(False)
     
     @classmethod
-    def fill_stock_table(cls, combobox: FormCombobox, checkbox: QCheckBox, table: QTableWidget, db: Database) -> None:
+    def fill_stock_table(cls, combobox: FormCombobox, state: bool, table: QTableWidget, db: Database) -> None:
         """If the checkbox is checked, renders the table for all products."""
         try:
-            if checkbox.isChecked():
+            # Clearing the table
+            table.clearContents()
+            table.setRowCount(0)
+            if state:
                 log.debug("Rendering for all products")
                 product_list = db.get_stock()
-                # Clearing the table
-                table.clearContents()
-                table.setRowCount(0)
                 # Making sure there's enough rows in the table
-                for row in range(0, len(product_list)):
+                for row, product in enumerate(product_list):
+                    this_row = []
                     if not (table.rowCount() == len(product_list)):
                         table.insertRow(row)
-                    for column, stored_product in enumerate(product_list):
-                        table.setItem(row, column, )
-                        pass
+                    for element in product:
+                        this_row.append(element)
+                    for column, product_item in enumerate(this_row):
+                        table.setItem(row, column, product_item)                                            
             else:
                 log.debug("Rendering for one product")
+                product_name = combobox.currentText().lower()
+                prod_items = db.get_stock(product_name)
+                table.insertRow(0)
+                for column, item in enumerate(prod_items):
+                    table.setItem(0, column, item)
         except Exception:
             log.critical("An exception was raised.")
             raise

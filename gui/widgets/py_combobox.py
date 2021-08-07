@@ -52,7 +52,8 @@ class FormCombobox(QComboBox):
 
         disabled_str = f"""
         QComboBox {{
-            background-color: {Color.CONTENT_BACKGROUND}
+            background-color: {Color.CONTENT_BACKGROUND};
+            color: grey;
         }}
         """
         if self.isEnabled():

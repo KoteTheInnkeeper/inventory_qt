@@ -28,12 +28,8 @@ class UIStackedPages(object):
         self.complete_sell_frame.setObjectName(u"complete_sell_frame")
 
         # Table where we can see the products for this transaction
-        self.selling_table = QTableWidgetItem()
-
-        
+        self.selling_table = QTableWidgetItem() 
          
-        
-
         # Adding widgets and frames to this layout
 
         StackedPages.addWidget(self.sell_page)

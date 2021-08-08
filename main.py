@@ -181,6 +181,7 @@ class MainWindow(QMainWindow):
             QMessageBox.critical(self, "No stored products", "At the moment, there are no products stored. You can add them in the 'add buy' section.")
         except Exception:
             log.critical("An exception was raised.")
+            QMessageBox(self, "Database error", "There was an error in database. Contact the administrator.") 
         else:
             self.clear_btns(self.ui.ui_pages.stock_menu)
             self.ui.ui_pages.show_stock_btn.set_active(True)

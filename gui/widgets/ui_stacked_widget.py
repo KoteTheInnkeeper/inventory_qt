@@ -9,18 +9,32 @@ class UIStackedPages(object):
             StackedPages.setObjectName(u"StackedPages")
         StackedPages.resize(640, 480)
         StackedPages.setWindowTitle(u"StackedWidget")
+
+        # Sell page
         self.sell_page = QWidget()
         self.sell_page.setObjectName(u"sell_page")
-        self.home_layout = QVBoxLayout(self.sell_page)
-        self.home_layout.setSpacing(0)
-        self.home_layout.setObjectName(u"home_layout")
-        self.home_layout.setContentsMargins(0, 0, 0, 0)
-        self.sell_label = QLabel(self.sell_page)
-        self.sell_label.setObjectName(u"sell_label")
-        self.sell_label.setText(u"Sell page")
-        self.sell_label.setAlignment(Qt.AlignCenter)
+        self.sell_layout = QVBoxLayout(self.sell_page)
+        self.sell_layout.setSpacing(0)
+        self.sell_layout.setObjectName(u"sell_layout")
+        self.sell_layout.setContentsMargins(0, 0, 0, 0)
+        
+        # Frames for this page
+        # Frame for the input in products
+        self.add_product_frame = QFrame()
+        self.add_product_frame.setObjectName(u"sell_product_frame")
 
-        self.home_layout.addWidget(self.sell_label)
+        # Frame for add the selling process.
+        self.complete_sell_frame = QFrame()
+        self.complete_sell_frame.setObjectName(u"complete_sell_frame")
+
+        # Table where we can see the products for this transaction
+        self.selling_table = QTableWidgetItem()
+
+        
+         
+        
+
+        # Adding widgets and frames to this layout
 
         StackedPages.addWidget(self.sell_page)
 

@@ -1,3 +1,4 @@
+from data.database_cursor import DBCursor
 import logging
 import time
 import sys
@@ -90,6 +91,9 @@ class MainWindow(QMainWindow):
 
         # Signal for when the current text has changed in the show stock combobox
         self.ui.ui_pages.ui_stock_stacked_pages.select_product_combobox.currentTextChanged.connect(self.product_name_has_changed)
+
+        # Signal for the stock being updated
+        self.ui.ui_pages.ui_stock_stacked_pages.save_changes_btn.clicked.connect(self.update_stock)
 
         # Showing the sell page first
         self.show_sell()
@@ -228,6 +232,28 @@ class MainWindow(QMainWindow):
         
         self.clear_fields(self.ui.ui_pages.ui_stock_stacked_pages.set_product_frame)
 
+    def update_stock(self) -> None:
+        """Updates the stock accordingly."""
+        log.info("An update for the stock was issued.")
+        try:
+            table_text = UICode.get_table_rows_text(self.ui.ui_pages.ui_stock_stacked_pages.show_stock_list_page_table)
+            for product in table_text:
+                product.pop(1)
+                product.pop(1)
+                print(product)
+                db.update_product_with_rows(product)
+        except Exception:
+            log.critical("An exception was raised.")
+            raise
+        else:
+            QMessageBox.information(self, "Updated!", "The stocks were updated successfully.")
+            UICode.fill_stock_table(
+                self.ui.ui_pages.ui_stock_stacked_pages.select_product_combobox,
+                self.ui.ui_pages.ui_stock_stacked_pages.show_all_products_checkbox.isChecked(),
+                self.ui.ui_pages.ui_stock_stacked_pages.show_stock_list_page_table,
+                db
+            )
+
     def clear_buy_list(self):
         """Clears the table where we show what's currently being added to the list."""
         log.debug("A clearing of the buy list table was issued.")
@@ -298,6 +324,8 @@ class MainWindow(QMainWindow):
         except ProductNotFound:
             log.critical("There are no products called like so.")
             pass
+    
+
     
  
 

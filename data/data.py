@@ -73,6 +73,20 @@ class Database:
             raise DatabaseIntegrityError("There's a matching name or id already stored.")
         else:
             log.info(f"{product.__repr__} was added successfully.")
+
+    def update_product_with_rows(self, product: List[str]):
+        """Updates the product when there's only text."""
+        try:
+            id = int(product.pop(0))
+            log.debug(f"Updating product with {id} as id.")
+            with DBCursor(self.host) as cursor:
+                cursor.execute("UPDATE items SET cost_price = ?, sell_price = ?, units = ? WHERE rowid = ?", (*product, id))
+        except Exception:
+            log.critical("An exception was raised.")
+            QMessageBox.critical(self, "Error", "An error happened when trying to update.")            
+        else:
+            log.debug("The product was successfully")
+
     
     def update_product(self, product: StoredProduct):
         prod_param = product.to_db()

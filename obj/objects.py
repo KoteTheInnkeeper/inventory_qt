@@ -19,8 +19,8 @@ class Product:
             self.cost = float(cost)
             self.price = float(price)
         except ValueError:
-            log.critical("One of the given parameters wasn't the specified type.")
-            raise InvalidType("An invalid type was specified for at least one of this product's parameters.")
+            log.critical("Invalid types were entered to the initialization of this StoredProduct object.")
+            raise InvalidType("Invalid types were entered to the initialization of this StoredProduct object.")
 
     def __repr__(self) -> str:
         return f"<PRODUCT OBJECT identified with name '{self.name.upper()}': C {self.cost}, P {self.price}; U {self.units}>"
@@ -34,15 +34,14 @@ class Product:
             'price': self.price
         }
 
-
 class StoredProduct(Product):
     def __init__(self, id: int, name: str, units: int, last_buy: float, cost: float, price: float):
         try:
             super().__init__(name, units, last_buy,cost, price)
             self.id = int(id)
         except ValueError:
-            log.critical("The id wasn't an integer.")
-            raise InvalidType("The id wasn't an integer.")
+            log.critical("Invalid types were entered to the initialization of this StoredProduct object.")
+            raise InvalidType("Invalid types were entered to the initialization of this StoredProduct object.")
     
     def __repr__(self) -> str:
         return  f"<STORED PRODUCT OBJECT identified with name {self.name.upper()} and id {self.id}: C {self.cost}; P {self.cost}; U {self.units}"

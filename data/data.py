@@ -77,21 +77,31 @@ class Database:
     def update_product_with_rows(self, product: List[str]):
         """Updates the product when there's only text."""
         try:
-            id = int(product.pop(0))
+            id, cost, price, stock = product
+            if not (cost and price and stock):
+                raise BlankFieldError("A field was blank.")
+            cost = float(cost)
+            price = float(price)
+            stock = int(stock)
+            id = int(id)
             log.debug(f"Updating product with {id} as id.")
             with DBCursor(self.host) as cursor:
-                cursor.execute("UPDATE items SET cost_price = ?, sell_price = ?, units = ? WHERE rowid = ?", (*product, id))
+                cursor.execute("UPDATE items SET cost_price = ?, sell_price = ?, units = ? WHERE rowid = ?", (cost, price, stock, id))
+        except ValueError:
+            log.critical("At least one of the entered values isn't valid.")
+            raise InvalidType("At least one of the entered values isn't the right type.")
         except Exception:
             log.critical("An exception was raised.")
-            QMessageBox.critical(self, "Error", "An error happened when trying to update.")            
+            raise    
         else:
             log.debug("The product was successfully")
 
-    
     def update_product(self, product: StoredProduct):
         prod_param = product.to_db()
         log.debug("Updating a product.")
         try:
+            if not ():
+                raise BlankFieldError("Blank field were encountered.")
             with DBCursor(self.host) as cursor:
                 cursor.execute("UPDATE items SET name = ?, units = units + ?, last_buy = ?, cost_price = ?, sell_price = ? WHERE rowid = ?", (prod_param['name'], prod_param['units'], prod_param['last_buy'], prod_param['cost'], prod_param['price'], prod_param['id']))
         except Exception:

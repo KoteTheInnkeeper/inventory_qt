@@ -242,11 +242,18 @@ class MainWindow(QMainWindow):
                 product.pop(1)
                 product.pop(1)
                 db.update_product_with_rows(product)
+        except BlankFieldError:
+            log.critical("A field was left blank.")
+            QMessageBox.critical(self, "Unable to update", "One of the fields was left blank. This way it is imposible for the database to be edited!")
+        except InvalidType:
+            log.critical("An invalid type of data was entered in a field in the table.")
+            QMessageBox.critical(self, "Invalid input", "You entered an invalid type of data in a field. Remember you can only enter quantities!")
         except Exception:
             log.critical("An exception was raised.")
             raise
         else:
             QMessageBox.information(self, "Updated!", "The stocks were updated successfully.")
+        finally:
             UICode.fill_stock_table(
                 self.ui.ui_pages.ui_stock_stacked_pages.select_product_combobox,
                 self.ui.ui_pages.ui_stock_stacked_pages.show_all_products_checkbox.isChecked(),
@@ -273,6 +280,11 @@ class MainWindow(QMainWindow):
                 else:
                     product_obj = StoredProduct(product[0], product[1], product[2], time.time(), product[3], product[4])
                     db.update_product(product_obj)
+        except BlankFieldError:
+            log.critical("A field was left blank.")
+            QMessageBox.critical(self, "Unable to update", "One of the fields was left blank. This way it is imposible for the database to be edited!")
+        except InvalidType:
+            QMessageBox.critical(self, "Invalid input", "You entered an invalid type of data in a field. Remember you can only enter quantities!")
         except DatabaseIntegrityError:
             log.error("There's a product with the same name and this one was marked as a new one.")
             QMessageBox.critical(self, "Error", f"There's already a product named {product_obj.name.upper()}. Please, search it in the list instead.")
@@ -285,12 +297,11 @@ class MainWindow(QMainWindow):
             raise
         else:
             QMessageBox.about(self, "Stock buy added", "The bought products were added to stock successfully.")
-        finally:
             log.debug("Updating comboboxes")
             UICode.update_comboboxes(self.ui.ui_pages.ui_stock_stacked_pages.add_buy_page, db.get_product_names())
             UICode.update_comboboxes(self.ui.ui_pages.ui_stock_stacked_pages.stock_list_page, db.get_product_names())
             log.debug("Clearing the table")
-            self.clear_buy_list()
+            self.clear_buy_list()            
 
     def toggled_show_all_products_checkbox(self, state: bool):
         """If it's checked, then it shows all products. Otherwise, it just shows the one selected."""

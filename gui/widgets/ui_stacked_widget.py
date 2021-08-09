@@ -29,7 +29,7 @@ class UIStackedPages(object):
         self.add_product_frame.setObjectName(u"sell_product_frame")
         # A layout for this frame
         self.add_product_layout = QHBoxLayout(self.add_product_frame)
-        self.add_product_layout.setSpacing(10)
+        self.add_product_layout.setSpacing(5)
         self.add_product_layout.setContentsMargins(10, 0, 10, 0)
         
         # A label that preceds the combobox

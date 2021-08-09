@@ -241,7 +241,6 @@ class MainWindow(QMainWindow):
             for product in table_text:
                 product.pop(1)
                 product.pop(1)
-                print(product)
                 db.update_product_with_rows(product)
         except Exception:
             log.critical("An exception was raised.")
@@ -325,10 +324,7 @@ class MainWindow(QMainWindow):
         except ProductNotFound:
             log.critical("There are no products called like so.")
             pass
-    
 
-    
- 
 
 class UICode:
     @classmethod

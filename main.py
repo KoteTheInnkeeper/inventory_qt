@@ -218,6 +218,7 @@ class MainWindow(QMainWindow):
         cost = QTableWidgetItem(cost)
         price = QTableWidgetItem(price)
         id.setTextAlignment(Qt.AlignCenter)
+        id.setFlags(Qt.ItemIsEnabled)
         name.setTextAlignment(Qt.AlignCenter)
         units.setTextAlignment(Qt.AlignCenter)
         cost.setTextAlignment(Qt.AlignCenter)

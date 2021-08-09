@@ -53,7 +53,7 @@ class UIStockStackedPages(object):
         self.cost_label.setStyleSheet("font: 100 13pt 'Segoe UI';")
         # A cost line_edit
         self.cost_lineedit = FormLineEdit(visibility=True, width=75, text_alignment = "right")
-        validator = QRegularExpressionValidator(QRegularExpression("[0-9]+.{1}[0-9]{3}"))
+        validator = QRegularExpressionValidator(QRegularExpression("[0-9]*\.[0-9]{2}"))
         self.cost_lineedit.setValidator(validator)
         # Cash label
         self.cash_label = QLabel("$")
@@ -73,7 +73,7 @@ class UIStockStackedPages(object):
 
         # Units label
         self.units_label = QLabel("Units")
-        self.units_label.setStyleSheet("font: 100 13pt 'SEgoe UI';")
+        self.units_label.setStyleSheet("font: 100 13pt 'Segoe UI';")
         # Units lineedit
         self.units_lineedit = FormLineEdit(visibility=True, width=50, text_alignment="right")
         validator = QRegularExpressionValidator(QRegularExpression("[0-9]+"))

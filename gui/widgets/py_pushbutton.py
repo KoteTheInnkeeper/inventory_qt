@@ -314,6 +314,7 @@ class FormButton(QPushButton):
 
         QPushButton:hover {{
             background-color: {self.btn_hover};
+            border: 1px solid {self.btn_hover};
         }}
         
         QPushButton:pressed {{

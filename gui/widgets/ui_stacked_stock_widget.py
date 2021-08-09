@@ -210,9 +210,28 @@ class UIStockStackedPages(object):
         self.show_stock_list_page_table.horizontalHeader().setVisible(True)
         self.show_stock_list_page_table.verticalHeader().setVisible(False)
 
+        # A frame to put the button to update
+        self.update_stock_frame = QFrame()
+        self.update_stock_frame.setObjectName(u"update_stock_frame")
+        # A layout for this frame
+        self.update_stock_layout = QHBoxLayout(self.update_stock_frame)
+        self.update_stock_layout.setSpacing(10)
+        self.update_stock_layout.setContentsMargins(0, 0, 0, 0)
+
+        # A spacer to push this button to the most right
+        self.update_stock_spacer = QSpacerItem(20, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        # A button to save changes in stock
+        self.save_changes_btn = FormButton("Save changes")
+        
+        # Adding these to the update_stock_layout
+        self.update_stock_layout.addItem(self.update_stock_spacer)
+        self.update_stock_layout.addWidget(self.save_changes_btn)
+
+
         # Adding the select product frame and table to this layout
         self.stock_list_page_layout.addWidget(self.select_product)
         self.stock_list_page_layout.addWidget(self.show_stock_list_page_table)
+        self.stock_list_page_layout.addWidget(self.update_stock_frame)
 
         # Adding both pages to the stacked stock pages.
         StockStackedPages.addWidget(self.add_buy_page)

@@ -21,3 +21,7 @@ class ProductNotFound(Exception):
 class NoProductsSpecified(Exception):
     def __init__(self, message: str) -> None:
         super().__init__(message)
+
+class BlankFieldError(Exception):
+    def __init__(self, message: str) -> None:
+        super().__init__(message)

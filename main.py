@@ -51,6 +51,7 @@ class MainWindow(QMainWindow):
         self.ui.setup_ui(self)
 
         # Populating product comboboxes properly
+        UICode.update_comboboxes(self.ui.ui_pages.sell_page, db.get_product_names())
         UICode.update_comboboxes(self.ui.ui_pages.ui_stock_stacked_pages.add_buy_page, db.get_product_names())
         UICode.update_comboboxes(self.ui.ui_pages.ui_stock_stacked_pages.stock_list_page, db.get_product_names())
         # Disabling the one for the stock list by default, since the "show all" checkbox will be checked also by default
@@ -75,6 +76,9 @@ class MainWindow(QMainWindow):
         # Signals for each minor button
         self.ui.ui_pages.add_buy_btn.clicked.connect(self.show_add_stock)
         self.ui.ui_pages.show_stock_btn.clicked.connect(self.show_stock_list_page)
+
+        # Signal for adding a product to the selling list.
+        self.ui.ui_pages.add_item_btn.clicked.connect(self.add_to_cart)
 
         # Signal for the checkbox to add a new product
         self.ui.ui_pages.ui_stock_stacked_pages.new_product_checkbox.toggled.connect(self.toggled_new_product_checkbox)
@@ -151,6 +155,7 @@ class MainWindow(QMainWindow):
         self.clear_btns(self.ui.left_menu)
         self.ui.sell_btn.set_active(True)
         self.ui.top_label_left.setText("Sell")
+        UICode.update_comboboxes(self.ui.ui_pages.sell_page, db.get_product_names())
         self.ui.pages.setCurrentWidget(self.ui.ui_pages.sell_page)
 
     def show_stock(self):
@@ -335,6 +340,29 @@ class MainWindow(QMainWindow):
         except ProductNotFound:
             log.critical("There are no products called like so.")
             pass
+    
+    def add_to_cart(self) -> None:
+        """Adds an item to the cart."""
+        try:
+            name = self.ui.ui_pages.add_product_combobox.currentText().lower()
+            units = int(self.ui.ui_pages.sell_units_lineedit.text())
+            product_params = db.get_product(name)
+        except ValueError:
+            log.critical("Something different than a quantity was inputed at the units field.")
+            QMessageBox.critical(self, "Invalid units", "Invalid input in the 'units' field. Remember you can only input integers.")
+        except ProductNotFound:
+            QMessageBox.critical(self, "Product not found", "The product wasn't found.")
+        except Exception:
+            log.critical("An exception was raised.")
+            raise
+        else:
+            try:
+                pass
+            except Exception:
+                log.critical("An exception was raised.")
+                raise
+
+            
 
 
 class UICode:

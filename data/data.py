@@ -1,6 +1,7 @@
 import logging
 import os
 import time
+from types import DynamicClassAttribute
 logging.basicConfig(format="%(asctime)s %(levelname)-8s [%(filename)s:%(lineno)d] func:%(funcName)s - %(message)s", level=logging.DEBUG,
                     filename='log.log')
 
@@ -184,6 +185,20 @@ class Database:
             log.debug("A StoredProduct list was consumated.")
             return product_list
 
+    def get_product(self, name: str) -> List[str]:
+        """Gets the product's parameters """
+        try:
+            with DBCursor(self.host) as cursor:
+                cursor.execute("SELECT units, cost_price, sell_price FROM items WHERE rowid = ?", (int(self.get_product_id(name.lower())), ))
+                
+        except ValueError:
+            log.critical("The id wasn't found within the database.")
+            raise ProductNotFound("The product wasn't found.")
+        except Exception:
+            log.critical("An exception was raised.")
+            raise
+        
+        pass
 
 
 

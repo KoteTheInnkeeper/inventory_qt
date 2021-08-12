@@ -77,28 +77,35 @@ class UIStockStackedPages(object):
         # Units lineedit
         self.units_lineedit = FormLineEdit(visibility=True, width=50, text_alignment="right")
         validator = QRegularExpressionValidator(QRegularExpression("[0-9]+"))
-        self.units_lineedit.setValidator(validator)        
-
-        # Spacer
-        self.btn_spacer_2 = QSpacerItem(100000, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-        # A button to add this product
-        self.add_product_btn = FormButton("+", height=25)
+        self.units_lineedit.setValidator(validator)
 
         # Let's add these three elements to the layout
         self.set_product_layout.addWidget(self.set_product_label)
         self.set_product_layout.addWidget(self.set_product_combobox)
         self.set_product_layout.addWidget(self.new_product_linedit)
         self.set_product_layout.addWidget(self.new_product_checkbox)
-        self.set_product_layout.addWidget(self.cost_label)
-        self.set_product_layout.addWidget(self.cost_lineedit)
-        self.set_product_layout.addWidget(self.cash_label)
-        self.set_product_layout.addWidget(self.price_label)
-        self.set_product_layout.addWidget(self.price_lineedit)
-        self.set_product_layout.addWidget(self.cash_label_2)
         self.set_product_layout.addWidget(self.units_label)
         self.set_product_layout.addWidget(self.units_lineedit)
-        self.set_product_layout.addItem(self.btn_spacer_2)
-        self.set_product_layout.addWidget(self.add_product_btn)
+        
+        # Another frame to keep the button below
+        self.add_product_btn_frame = QFrame()
+        #A layout for this frame
+        self.add_product_btn_layout = QHBoxLayout(self.add_product_btn_frame)
+        self.add_product_btn_layout.setContentsMargins(0, 0, 0, 0)
+        self.add_product_btn_layout.setSpacing(10)
+        # Spacer
+        self.btn_spacer_2 = QSpacerItem(100000, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        # A button to add this product
+        self.add_product_btn = FormButton("+", height=25)
+        # Adding these two to the layout
+        self.add_product_btn_layout.addWidget(self.cost_label)
+        self.add_product_btn_layout.addWidget(self.cost_lineedit)
+        self.add_product_btn_layout.addWidget(self.cash_label)
+        self.add_product_btn_layout.addWidget(self.price_label)
+        self.add_product_btn_layout.addWidget(self.price_lineedit)
+        self.add_product_btn_layout.addWidget(self.cash_label_2)
+        self.add_product_btn_layout.addItem(self.btn_spacer_2)
+        self.add_product_btn_layout.addWidget(self.add_product_btn)     
 
         # A table for us to show what's currently being added as a buy
         self.buy_list_table = QTableWidget()
@@ -147,6 +154,7 @@ class UIStockStackedPages(object):
 
         # Adding all of this to the add_page layout
         self.add_buy_layout.addWidget(self.set_product_frame)
+        self.add_buy_layout.addWidget(self.add_product_btn_frame)
         self.add_buy_layout.addWidget(self.buy_list_table)
         self.add_buy_layout.addWidget(self.stock_btn_frame)
 

@@ -6,12 +6,13 @@ logging.basicConfig(format="%(asctime)s %(levelname)-8s [%(filename)s:%(lineno)d
                     filename='log.log')
 
 
-from typing import List, Union
+from typing import Dict, List, Union
 from data.database_cursor import *
 from obj.objects import *
 from utils.errors import *
 
 log = logging.getLogger("inventory_qt.data")
+product_std_fields = ('id', 'name', 'units', '')
 
 class Database:
     def __init__(self, host: str) -> None:
@@ -101,7 +102,7 @@ class Database:
         prod_param = product.to_db()
         log.debug("Updating a product.")
         try:
-            if not ():
+            if not (prod_param['id'] and prod_param['name'] and prod_param['units'] and prod_param['last_buy'] and prod_param['cost'] and prod_param['price']):
                 raise BlankFieldError("Blank field were encountered.")
             with DBCursor(self.host) as cursor:
                 cursor.execute("UPDATE items SET name = ?, units = units + ?, last_buy = ?, cost_price = ?, sell_price = ? WHERE rowid = ?", (prod_param['name'], prod_param['units'], prod_param['last_buy'], prod_param['cost'], prod_param['price'], prod_param['id']))
@@ -185,20 +186,27 @@ class Database:
             log.debug("A StoredProduct list was consumated.")
             return product_list
 
-    def get_product(self, name: str) -> List[str]:
+    def get_product_for_cart(self, name: str) -> Dict:
         """Gets the product's parameters """
         try:
             with DBCursor(self.host) as cursor:
-                cursor.execute("SELECT units, cost_price, sell_price FROM items WHERE rowid = ?", (int(self.get_product_id(name.lower())), ))
-                
+                cursor.execute("SELECT units, sell_price FROM items WHERE rowid = ?", (int(self.get_product_id(name.lower())), ))
+                result = cursor.fetchone()
+                if not result:
+                    log.critical("Product not found in database.")
+                    raise ProductNotFound("The product wasn't found.")
+                return {
+                    'id': int(self.get_product_id(name.lower())),
+                    'name': name,
+                    'units': int(result[0]),
+                    'price': float(result[1])
+                }                
         except ValueError:
-            log.critical("The id wasn't found within the database.")
+            log.critical("The id wasn't found within the database or one of the retrieved fields wasn't a number when it had to.")
             raise ProductNotFound("The product wasn't found.")
         except Exception:
             log.critical("An exception was raised.")
             raise
-        
-        pass
 
 
 

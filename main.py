@@ -345,8 +345,8 @@ class MainWindow(QMainWindow):
         """Adds an item to the cart."""
         try:
             name = self.ui.ui_pages.add_product_combobox.currentText().lower()
-            units = int(self.ui.ui_pages.sell_units_lineedit.text())
-            product_params = db.get_product(name)
+            selling_units = int(self.ui.ui_pages.sell_units_lineedit.text())
+            product: dict = db.get_product_for_cart(name)
         except ValueError:
             log.critical("Something different than a quantity was inputed at the units field.")
             QMessageBox.critical(self, "Invalid units", "Invalid input in the 'units' field. Remember you can only input integers.")
@@ -357,10 +357,17 @@ class MainWindow(QMainWindow):
             raise
         else:
             try:
-                pass
+                log.debug("Product retrieved successfully.")
+                product['selling_units'] = selling_units
+                product['total'] = product['price'] * selling_units
+                product['units_lasting'] = int(product['units'] - selling_units)
+                UICode.add_to_cart_table(product, self.ui.ui_pages.selling_table)
+
             except Exception:
                 log.critical("An exception was raised.")
                 raise
+        finally:
+            self.ui.ui_pages.sell_units_lineedit.clear()
 
             
 
@@ -442,13 +449,26 @@ class UICode:
             log.critical("An exception was raised.")
             raise
 
-
-        
-        
-
-
-        
-    
+    @classmethod
+    def add_to_cart_table(cls, product: dict, table: QTableWidget):
+        """Adds the product to the cart table."""
+        try:
+            log.info("Adding a product to the cart.")
+            id = QTableWidgetItem(str(product['id']))
+            name = QTableWidgetItem(product['name'].upper())
+            selling_units = QTableWidgetItem(str(product['selling_units']))
+            unit_price = QTableWidgetItem("%.2f" %product['price'])
+            total = QTableWidgetItem("%.2f" %product['total'])
+            lasting_units = QTableWidgetItem(str(product['units_lasting']))
+            items_list = [id, name, selling_units, unit_price, total, lasting_units]
+            row = table.rowCount()
+            table.insertRow(row)
+            for i, item in enumerate(items_list):
+                item.setTextAlignment(Qt.AlignCenter)
+                table.setItem(row, i, item)
+        except Exception:
+            log.critical("An exception was raised.")
+            raise
 
         
 
